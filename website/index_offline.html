@@ -114,7 +114,6 @@ document.body.appendChild(el);
 
   <!-- End of Progressive Web Application setup -->
 
-  
 
   <!-- From https://github.com/rafaelaroca/blockly-cv2 for OpenCV  --> 
   <!-- 
@@ -150,26 +149,26 @@ document.body.appendChild(el);
       </div>
       <div class="icon" id="deviceSelect">
         <select id="device_selector">
-          <option value="ESP8266" class="d-none">ESP8266</option>
-          <option value="ESP32S2" class="d-none">Franzininho Wifi (ESP32S2+CircuitPython)</option>
-          <option value="ESP8266" class="d-none">Wemos D1 mini</option>
-          <option value="ESP32" selected>ESP32</option>
-          <option value="ESP32basic" class="d-none">ESP32 (Basic)</option>
-          <option value="M5STICK" class="d-none">m5stick (ESP32)</option>
-          <option value="Nucleo" class="d-none">ST Nucleo (mBed)</option>
-          <option value="BBBlack" class="d-none">Beagle Bone Black</option>
-          <option value="BBC" class="d-none">BBC Microbit</option>
-          <option value="RPI4" class="d-none">Raspberry Pi (any Linux)</option>
-          <option value="RPI_Pico" class="d-none">Raspberry Pi Pico</option>
-          <option value="RPI_Pico_W" class="d-none">Raspberry Pi Pico W</option>
-          <option value="MakerPi" class="d-none">Maker Pi RP2040</option>
-          <option value="RPI_PicoETH" class="d-none">W5100S-EVB-Pico (RP2040)</option>
-          <option value="UNO" class="d-none">Arduino UNO or MEGA (Snek @ 38400)</option>
-          <option value="UNO2" class="d-none">Arduino UNO or MEGA (Snek @ 115200)</option>
-          <option value="EV3" class="d-none">Lego EV3</option>
-          <option value="pion_cansat" class="d-none">PION CanSat (ESP32)</option>
-          <option value="pion_cubesat" class="d-none">PION CubeSat (ESP32)</option>
-          <option value="vespa" class="d-none">RoboCore Vespa (ESP32)</option>
+          <option value="ESP8266">ESP8266</option>
+          <option value="ESP32S2">Franzininho Wifi (ESP32S2+CircuitPython)</option>
+          <option value="ESP8266">Wemos D1 mini</option>
+          <option value="ESP32">ESP32</option>
+          <option value="ESP32basic">ESP32 (Basic)</option>
+          <option value="M5STICK">m5stick (ESP32)</option>
+          <option value="Nucleo">ST Nucleo (mBed)</option>
+          <option value="BBBlack">Beagle Bone Black</option>
+          <option value="BBC">BBC Microbit</option>
+          <option value="RPI4">Raspberry Pi (any Linux)</option>
+          <option value="RPI_Pico">Raspberry Pi Pico</option>
+          <option value="RPI_Pico_W">Raspberry Pi Pico W</option>
+          <option value="MakerPi">Maker Pi RP2040</option>
+          <option value="RPI_PicoETH">W5100S-EVB-Pico (RP2040)</option>
+          <option value="UNO">Arduino UNO or MEGA (Snek @ 38400)</option>
+          <option value="UNO2">Arduino UNO or MEGA (Snek @ 115200)</option>
+          <option value="EV3">Lego EV3</option>
+          <option value="pion_cansat">PION CanSat (ESP32)</option>
+          <option value="pion_cubesat">PION CubeSat (ESP32)</option>
+          <option value="vespa">RoboCore Vespa (ESP32)</option>
         </select>
         <button id="runButton" class="notext primary icon" title="..."></button>
       </div>
@@ -192,7 +191,7 @@ document.body.appendChild(el);
     </div>
 
   <div class='channel-panel'>
-    <button class='icon d d-none' id="bluetoothButton">Bluetooth</button>
+    <button class='icon d-none' id="bluetoothButton">Bluetooth</button>
     <div>
       <button class='icon' id="serialButton">Serial</button>
       <label for="resetBoard" class="checkswitch">
@@ -279,7 +278,7 @@ document.body.appendChild(el);
     <center>
       <label id="device_title"><b>ESP8266</b><br></label>
     <br>
-    <!-- <img id="device_img" src="devinfo/Node-MCU-ESP-12E-Pin-Out-Diagram2.jpg"> -->
+      <img id="device_img" src="./devinfo/Node-MCU-ESP-12E-Pin-Out-Diagram2.jpg">
     <br>
 
     <label id="device_desc">
