@@ -12274,3 +12274,196 @@ Blockly.Blocks['mpu9250_temp'] = {
 };
 
 
+
+
+
+
+// Movement
+
+Blockly.Blocks['set_servo_x'] = {
+  init: function() {
+    this.appendValueInput("part")
+        .setCheck("Number")
+        .appendField("set pitch to");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(350);
+    this.setTooltip("set pitch to");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['set_servo_y'] = {
+  init: function() {
+    this.appendValueInput("part")
+        .setCheck("Number")
+        .appendField("set rotation to");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(350);
+    this.setTooltip("set rotation to");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['slide_servo_x'] = {
+  init: function() {
+    this.appendValueInput("part")
+        .setCheck("Number")
+        .appendField("set pitch to");
+    this.appendValueInput("time")
+        .setCheck("Number")
+        .appendField("for");
+    this.appendDummyInput()
+        .appendField("second");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(350);
+  this.setTooltip("set pitch to");
+  this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['slide_servo_y'] = {
+  init: function() {
+    this.appendValueInput("part")
+        .setCheck("Number")
+        .appendField("set rotation to");
+    this.appendValueInput("time")
+        .setCheck("Number")
+        .appendField("for");
+    this.appendDummyInput()
+        .appendField("second");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(350);
+    this.setTooltip("set rotation to");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['get_servo_x'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("get pitch");
+    this.setOutput(true, "Number");
+    this.setColour(350);
+    this.setTooltip("get pitch");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['get_servo_y'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("get rotation");
+    this.setOutput(true, "Number");
+    this.setColour(350);
+    this.setTooltip("get rotation");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['record_joystick'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("record joystick");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(350);
+  this.setTooltip("record joystick");
+  this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['perform_recording'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("perform recording");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(350);
+  this.setTooltip("perform recording");
+  this.setHelpUrl("#");
+  }
+};
+
+
+// Files
+
+Blockly.Blocks['load_file'] = {
+  init: function() {
+    this.appendValueInput("file")
+        .setCheck("String")
+        .appendField("load");
+    this.appendDummyInput()
+        .appendField("to device");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(80);
+    this.setTooltip("load file");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['exist_file'] = {
+  init: function() {
+    this.appendValueInput("file")
+        .setCheck("String")
+        .appendField("file");
+    this.appendDummyInput()
+        .appendField("exists");
+    this.setOutput(true, "Boolean");
+    this.setColour(80);
+    this.setTooltip("exist_file");
+    this.setHelpUrl("#");
+  }
+}
+
+Blockly.Blocks['delete_file'] = {
+  init: function() {
+    this.appendValueInput("file")
+        .setCheck("String")
+        .appendField("delete");
+    this.appendDummyInput()
+        .appendField("from device");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(80);
+    this.setTooltip("delete file");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['rename_file'] = {
+  init: function() {
+    this.appendValueInput("prev_name")
+        .setCheck("String")
+        .appendField("change name of file");
+    this.appendValueInput("new_name")
+        .setCheck("String")
+        .appendField("to");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(80);
+    this.setTooltip("rename_file");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['get_files'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("get all loaded files");
+    this.setInputsInline(true);
+    this.setOutput(true, "Array");
+    this.setColour(80);
+    this.setTooltip("get_files");
+    this.setHelpUrl("#");
+  }
+};

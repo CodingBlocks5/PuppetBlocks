@@ -5986,7 +5986,48 @@ _
     <sep></sep>
 
     <category name="Movement" colour="350">
-      <block type="controls_if"></block>
+      <block type="set_servo_x">
+        <value name="part">
+          <shadow type="math_number">
+            <field name="NUM">0.5</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="set_servo_y">
+        <value name="part">
+          <shadow type="math_number">
+            <field name="NUM">0.5</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="slide_servo_x">
+        <value name="part">
+          <shadow type="math_number">
+            <field name="NUM">0.5</field>
+          </shadow>
+        </value>
+        <value name="time">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="slide_servo_y">
+        <value name="part">
+          <shadow type="math_number">
+            <field name="NUM">0.5</field>
+          </shadow>
+        </value>
+        <value name="time">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="get_servo_x"></block>
+      <block type="get_servo_y"></block>
+      <block type="record_joystick"></block>
+      <block type="perform_recording"></block>
     </category>
 
     <category name="Screens" colour="20">
@@ -5998,7 +6039,40 @@ _
     </category>
 
     <category name="Files" colour="80">
-      <block type="controls_if"></block>
+      <block type="load_file">
+        <value name="file">
+          <shadow type="text">
+            <field name="TEXT">audio.wav</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="exist_file">
+        <value name="file">
+          <shadow type="text">
+            <field name="TEXT">audio.wav</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="delete_file">
+        <value name="file">
+          <shadow type="text">
+            <field name="TEXT">audio.wav</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="rename_file">
+        <value name="prev_name">
+          <shadow type="text">
+            <field name="TEXT">image.wav</field>
+          </shadow>
+        </value>
+        <value name="new_name">
+          <shadow type="text">
+            <field name="TEXT">audio.wav</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="get_files"></block>
     </category>
 
     <category name="Time" colour="110">

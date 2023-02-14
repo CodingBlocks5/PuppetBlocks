@@ -6502,3 +6502,100 @@ Blockly.Python['mpu9250_temp'] = function(block) {
 
 
 
+// Movement
+
+Blockly.Python['set_servo_x'] = function(block) {
+	var value_part = Blockly.Python.valueToCode(block, 'part', Blockly.Python.ORDER_ATOMIC);
+	// TODO: Assemble Python into code variable.
+	var code = 'set servo to ' + value_part + '...\n';
+	return code;
+};
+
+Blockly.Python['set_servo_y'] = function(block) {
+	var value_part = Blockly.Python.valueToCode(block, 'part', Blockly.Python.ORDER_ATOMIC);
+	// TODO: Assemble Python into code variable.
+	var code = '...\n';
+	return code;
+};
+
+Blockly.Python['slide_servo_x'] = function(block) {
+	var value_part = Blockly.Python.valueToCode(block, 'part', Blockly.Python.ORDER_ATOMIC);
+	var value_time = Blockly.Python.valueToCode(block, 'time', Blockly.Python.ORDER_ATOMIC);
+	// TODO: Assemble Python into code variable.
+	var code = '...\n';
+	return code;
+};
+
+Blockly.Python['slide_servo_y'] = function(block) {
+	var value_part = Blockly.Python.valueToCode(block, 'part', Blockly.Python.ORDER_ATOMIC);
+	var value_time = Blockly.Python.valueToCode(block, 'time', Blockly.Python.ORDER_ATOMIC);
+	// TODO: Assemble Python into code variable.
+	var code = '...\n';
+	return code;
+};
+
+Blockly.Python['get_servo_x'] = function(block) {
+	// TODO: Assemble Python into code variable.
+	var code = '...';
+	// TODO: Change ORDER_NONE to the correct strength.
+	return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['get_servo_y'] = function(block) {
+	// TODO: Assemble Python into code variable.
+	var code = '...';
+	// TODO: Change ORDER_NONE to the correct strength.
+	return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['record_joystick'] = function(block) {
+	// TODO: Assemble Python into code variable.
+	var code = '...\n';
+	return code;
+};
+
+Blockly.Python['perform_recording'] = function(block) {
+	// TODO: Assemble Python into code variable.
+	var code = '...\n';
+	return code;
+};
+
+
+// Files
+
+Blockly.Python['load_file'] = function(block) {
+	var value_file = Blockly.Python.valueToCode(block, 'file', Blockly.Python.ORDER_ATOMIC);
+	// TODO: Assemble Python into code variable.
+	var code = '...\n';
+	return code;
+};
+
+Blockly.Python['exist_file'] = function(block) {
+	var value_file = Blockly.Python.valueToCode(block, 'file', Blockly.Python.ORDER_ATOMIC);
+	// TODO: Assemble Python into code variable.
+	var code = '...';
+	// TODO: Change ORDER_NONE to the correct strength.
+	return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['delete_file'] = function(block) {
+	var value_file = Blockly.Python.valueToCode(block, 'file', Blockly.Python.ORDER_ATOMIC);
+	// TODO: Assemble Python into code variable.
+	var code = '...\n';
+	return code;
+};
+
+Blockly.Python['rename_file'] = function(block) {
+	var value_prev_name = Blockly.Python.valueToCode(block, 'prev_name', Blockly.Python.ORDER_ATOMIC);
+	var value_new_name = Blockly.Python.valueToCode(block, 'new_name', Blockly.Python.ORDER_ATOMIC);
+	// TODO: Assemble Python into code variable.
+	var code = '...\n';
+	return code;
+};
+
+Blockly.Python['get_files'] = function(block) {
+	// TODO: Assemble Python into code variable.
+	var code = '...';
+	// TODO: Change ORDER_NONE to the correct strength.
+	return [code, Blockly.Python.ORDER_NONE];
+};
