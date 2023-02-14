@@ -90,15 +90,9 @@ function checkCookie() {
   <script src="core/codemirror/codemirror.js"></script>
   <script src="core/codemirror/mode/python/python.js"></script>
 
-  <!-- Bootstrap Designs -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
   <!-- Progressive Web Application setup -->
   <script type="module">
-    // This is the "Offline copy of pages" service worker
+  // This is the "Offline copy of pages" service worker
 
 /*
  This code uses the pwa-update web component https://github.com/pwa-builder/pwa-update to register your service worker, tell the user when there is an update available and let the user know when your PWA is ready to use offline.
@@ -129,16 +123,16 @@ document.body.appendChild(el);
 
   <div class="top-menu">
 
-    <div class="logo">PuppetBlocks</div>
+    <div class="logo">BIPES</div>
       <div class="tabs">
         <div id="tab_blocks" class="tabon">...</div>
         <div id="tab_console" class="taboff">Console</div>
         <div id="tab_files" class="taboff">...</div>
-        <div id="tab_programs" class="taboff d-none">...</div>
-        <div id="tab_device" class="taboff d-none">...</div>
-        <div id="tab_iot" class="taboff d-none">IOT</div>
-        <div id="tab_mqtt" class="taboff d-none" onclick='document.getElementById("easymqtt_iframe").contentWindow.startEasyMQTT(window.easyMQTT_session);'>EasyMQTT</div>
-        <div id="tab_databoard" class="taboff d-none">Databoard</div>
+        <div id="tab_programs" class="taboff">...</div>
+        <div id="tab_device" class="taboff">...</div>
+        <div id="tab_iot" class="taboff">IOT</div>
+        <div id="tab_mqtt" class="taboff" onclick='document.getElementById("easymqtt_iframe").contentWindow.startEasyMQTT(window.easyMQTT_session);'>EasyMQTT</div>
+        <div id="tab_databoard" class="taboff">Databoard</div>
       </div>
       <button id="toolbarButton" class="notext icon medium" title="..."></button>
       <div class="toolbar">
@@ -148,26 +142,26 @@ document.body.appendChild(el);
       </div>
       <div class="icon" id="deviceSelect">
         <select id="device_selector">
-          <option value="ESP8266" class="d-none">ESP8266</option>
-          <option value="ESP32S2" class="d-none">Franzininho Wifi (ESP32S2+CircuitPython)</option>
-          <option value="ESP8266" class="d-none">Wemos D1 mini</option>
-          <option value="ESP32" selected>ESP32</option>
-          <option value="ESP32basic" class="d-none">ESP32 (Basic)</option>
-          <option value="M5STICK" class="d-none">m5stick (ESP32)</option>
-          <option value="Nucleo" class="d-none">ST Nucleo (mBed)</option>
-          <option value="BBBlack" class="d-none">Beagle Bone Black</option>
-          <option value="BBC" class="d-none">BBC Microbit</option>
-          <option value="RPI4" class="d-none">Raspberry Pi (any Linux)</option>
-          <option value="RPI_Pico" class="d-none">Raspberry Pi Pico</option>
-          <option value="RPI_Pico_W" class="d-none">Raspberry Pi Pico W</option>
-          <option value="MakerPi" class="d-none">Maker Pi RP2040</option>
-          <option value="RPI_PicoETH" class="d-none">W5100S-EVB-Pico (RP2040)</option>
-          <option value="UNO" class="d-none">Arduino UNO or MEGA (Snek @ 38400)</option>
-          <option value="UNO2" class="d-none">Arduino UNO or MEGA (Snek @ 115200)</option>
-          <option value="EV3" class="d-none">Lego EV3</option>
-          <option value="pion_cansat" class="d-none">PION CanSat (ESP32)</option>
-          <option value="pion_cubesat" class="d-none">PION CubeSat (ESP32)</option>
-          <option value="vespa" class="d-none">RoboCore Vespa (ESP32)</option>
+          <option value="ESP8266">ESP8266</option>
+          <option value="ESP32S2">Franzininho Wifi (ESP32S2+CircuitPython)</option>
+          <option value="ESP8266">Wemos D1 mini</option>
+          <option value="ESP32">ESP32</option>
+          <option value="ESP32basic">ESP32 (Basic)</option>
+          <option value="M5STICK">m5stick (ESP32)</option>
+          <option value="Nucleo">ST Nucleo (mBed)</option>
+          <option value="BBBlack">Beagle Bone Black</option>
+          <option value="BBC">BBC Microbit</option>
+          <option value="RPI4">Raspberry Pi (any Linux)</option>
+          <option value="RPI_Pico">Raspberry Pi Pico</option>
+          <option value="RPI_Pico_W">Raspberry Pi Pico W</option>
+          <option value="MakerPi">Maker Pi RP2040</option>
+          <option value="RPI_PicoETH">W5100S-EVB-Pico (RP2040)</option>
+          <option value="UNO">Arduino UNO or MEGA (Snek @ 38400)</option>
+          <option value="UNO2">Arduino UNO or MEGA (Snek @ 115200)</option>
+          <option value="EV3">Lego EV3</option>
+          <option value="pion_cansat">PION CanSat (ESP32)</option>
+          <option value="pion_cubesat">PION CubeSat (ESP32)</option>
+          <option value="vespa">RoboCore Vespa (ESP32)</option>
         </select>
         <button id="runButton" class="notext primary icon" title="..."></button>
       </div>
@@ -190,7 +184,7 @@ document.body.appendChild(el);
     </div>
 
   <div class='channel-panel'>
-    <button class='icon d d-none' id="bluetoothButton">Bluetooth</button>
+    <button class='icon' id="bluetoothButton">Bluetooth</button>
     <div>
       <button class='icon' id="serialButton">Serial</button>
       <label for="resetBoard" class="checkswitch">
@@ -277,7 +271,7 @@ document.body.appendChild(el);
     <center>
       <label id="device_title"><b>ESP8266</b><br></label>
     <br>
-    <!-- <img id="device_img" src="devinfo/Node-MCU-ESP-12E-Pin-Out-Diagram2.jpg"> -->
+    <img id="device_img" src="devinfo/Node-MCU-ESP-12E-Pin-Out-Diagram2.jpg">
     <br>
 
     <label id="device_desc">
