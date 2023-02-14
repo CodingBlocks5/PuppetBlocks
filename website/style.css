@@ -92,7 +92,8 @@ h1 {
   font-size: 2rem;
   font-weight: 600;
   line-height: 1.125;
-  color: #3298dc;
+  color: #000000;
+  font-family: "Titan One", sans-serif;
 }
 
 .top-menu > .logo:before  {
@@ -101,9 +102,11 @@ h1 {
   width: 2rem;
   height: 2rem;
   background-size: cover;
-  background-image: url(media/icons.svg);
+  background-image: url(media/icons.png);
   background-size: auto 4rem;
-  background-position: left calc(-2rem*8) top; /* heigth * index in icons.svg */
+  background-position: left calc(-2rem*8) top;
+  background-size: contain;
+  margin-right: 0.5rem;
 }
 
 .top-menu > .tabs {
