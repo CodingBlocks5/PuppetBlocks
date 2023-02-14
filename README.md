@@ -2,7 +2,7 @@
 
 tags
 
-logo
+[![logo](/assets/cover.jpg)](https://github.com/CodingBlocks5/PuppetBlocks)
 
 ## About the Project
 
