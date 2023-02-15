@@ -22,21 +22,16 @@ var libToInstall = '';
  */
 Code.LANGUAGE_NAME = {
   'en': 'English',
-  'pt-br': 'Portugues',
-  'es': 'Espanol',
+  'he': 'עברית',
+  'ar': 'العربية',
   'it': 'Italiano',
-  'fr': 'French',
-  'de': 'Deutsch',
-  'nb': 'Norwegian',
-  'zh-hans': 'Chinese (simplified)',
-  'zh-hant': 'Chinese (tradicional)',
-  'he': 'Hebrew'
+  'ru': 'Русский',
 };
 
 /**
  * List of RTL languages.
  */
-Code.LANGUAGE_RTL = ['ar', 'fa', 'he', 'lki'];
+Code.LANGUAGE_RTL = ['ar', 'he'];
 
 /**
  * Blockly's main workspace.
