@@ -6501,62 +6501,61 @@ Blockly.Python['mpu9250_temp'] = function(block) {
 };
 
 
+/** -------------------- PuppetBlocks -------------------- */
 
 // Movement
 
 Blockly.Python['set_servo_x'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
 	var value_part = Blockly.Python.valueToCode(block, 'part', Blockly.Python.ORDER_ATOMIC);
-	// TODO: Assemble Python into code variable.
-	var code = 'set servo to ' + value_part + '...\n';
+	var code = 'PuppetBlocks.Movement.setServoX(' + value_part + ')\n';
 	return code;
 };
 
 Blockly.Python['set_servo_y'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
 	var value_part = Blockly.Python.valueToCode(block, 'part', Blockly.Python.ORDER_ATOMIC);
-	// TODO: Assemble Python into code variable.
-	var code = '...\n';
+	var code = 'PuppetBlocks.Movement.setServoY(' + value_part + ')\n';
 	return code;
 };
 
 Blockly.Python['slide_servo_x'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
 	var value_part = Blockly.Python.valueToCode(block, 'part', Blockly.Python.ORDER_ATOMIC);
 	var value_time = Blockly.Python.valueToCode(block, 'time', Blockly.Python.ORDER_ATOMIC);
-	// TODO: Assemble Python into code variable.
-	var code = '...\n';
+	var code = 'PuppetBlocks.Movement.slideServoX(' + value_part + ', ' +  value_time+ ')\n';
 	return code;
 };
 
 Blockly.Python['slide_servo_y'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
 	var value_part = Blockly.Python.valueToCode(block, 'part', Blockly.Python.ORDER_ATOMIC);
 	var value_time = Blockly.Python.valueToCode(block, 'time', Blockly.Python.ORDER_ATOMIC);
-	// TODO: Assemble Python into code variable.
-	var code = '...\n';
+	var code = 'PuppetBlocks.Movement.slideServoY(' + value_part + ', ' +  value_time + ')\n';
 	return code;
 };
 
 Blockly.Python['get_servo_x'] = function(block) {
-	// TODO: Assemble Python into code variable.
-	var code = '...';
-	// TODO: Change ORDER_NONE to the correct strength.
+	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
+	var code = 'PuppetBlocks.Movement.getServoX()';
 	return [code, Blockly.Python.ORDER_NONE];
 };
 
 Blockly.Python['get_servo_y'] = function(block) {
-	// TODO: Assemble Python into code variable.
-	var code = '...';
-	// TODO: Change ORDER_NONE to the correct strength.
+	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
+	var code = 'PuppetBlocks.Movement.getServoY()';
 	return [code, Blockly.Python.ORDER_NONE];
 };
 
 Blockly.Python['record_joystick'] = function(block) {
-	// TODO: Assemble Python into code variable.
-	var code = '...\n';
+	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
+	var code = 'PuppetBlocks.Movement.recordJoystick()\n';
 	return code;
 };
 
 Blockly.Python['perform_recording'] = function(block) {
-	// TODO: Assemble Python into code variable.
-	var code = '...\n';
+	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
+	var code = 'PuppetBlocks.Movement.performRecording()\n';
 	return code;
 };
 
@@ -6564,38 +6563,36 @@ Blockly.Python['perform_recording'] = function(block) {
 // Files
 
 Blockly.Python['load_file'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
 	var value_file = Blockly.Python.valueToCode(block, 'file', Blockly.Python.ORDER_ATOMIC);
-	// TODO: Assemble Python into code variable.
-	var code = '...\n';
+	var code = 'PuppetBlocks.Files.loadFile(' + value_file + ')\n';
 	return code;
 };
 
 Blockly.Python['exist_file'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
 	var value_file = Blockly.Python.valueToCode(block, 'file', Blockly.Python.ORDER_ATOMIC);
-	// TODO: Assemble Python into code variable.
-	var code = '...';
-	// TODO: Change ORDER_NONE to the correct strength.
+	var code = 'PuppetBlocks.Files.fileExists(' + value_file + ')';
 	return [code, Blockly.Python.ORDER_NONE];
 };
 
 Blockly.Python['delete_file'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
 	var value_file = Blockly.Python.valueToCode(block, 'file', Blockly.Python.ORDER_ATOMIC);
-	// TODO: Assemble Python into code variable.
-	var code = '...\n';
+	var code = 'PuppetBlocks.Files.deleteFile(' + value_file + ')\n';
 	return code;
 };
 
 Blockly.Python['rename_file'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
 	var value_prev_name = Blockly.Python.valueToCode(block, 'prev_name', Blockly.Python.ORDER_ATOMIC);
 	var value_new_name = Blockly.Python.valueToCode(block, 'new_name', Blockly.Python.ORDER_ATOMIC);
-	// TODO: Assemble Python into code variable.
-	var code = '...\n';
+	var code = 'PuppetBlocks.Files.renameFile(' + value_prev_name +', ' + value_new_name + ')\n';
 	return code;
 };
 
 Blockly.Python['get_files'] = function(block) {
-	// TODO: Assemble Python into code variable.
-	var code = '...';
-	// TODO: Change ORDER_NONE to the correct strength.
+	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
+	var code = 'PuppetBlocks.Files.getFiles()';
 	return [code, Blockly.Python.ORDER_NONE];
 };
