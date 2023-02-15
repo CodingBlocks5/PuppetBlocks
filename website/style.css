@@ -107,6 +107,7 @@ h1 {
   background-position: left calc(-2rem*8) top;
   background-size: contain;
   margin-right: 0.5rem;
+  margin-left: 0.5rem;
 }
 
 .top-menu > .tabs {
