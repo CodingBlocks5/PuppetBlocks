@@ -282,6 +282,11 @@ document.body.appendChild(el);
   <div id="file-boxes">
   <div id="file-header">
     <span>File manager</span>
+    <label id="putFileCloudButton" for="cloudModalButton"  class="noteaxt button icon" title="Upload files to cloud" style="margin-top: 0.2rem">
+      <svg xmlns="http://www.w3.org/2000/svg" height="1.5rem" fill="currentColor" class="bi bi-cloud" viewBox="0 0 16 16">
+        <path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.825 10.328 3 8 3a4.53 4.53 0 0 0-2.941 1.1z"/>
+      </svg>
+    </label>
     <label id="putFileButton" for="put-file-select"  class="noteaxt button icon" title="Upload script to device"></label>
     <input name="PutFileList" id="put-file-select" type="file" accept=".md,.py" required="">
     <!--<input type="button" value="Run Blocks" onclick="Tool.runPython(); return false;" />-->
@@ -296,27 +301,101 @@ document.body.appendChild(el);
   <div id="put-file-list"></div>
   <input type="button" value="Send to device" id="put-file-button" onclick="Files.put_file(); return false;" />
   </div>-->
+
   <div id="file-status">...</div>
   <span id='filesPanel'>
-  <button type="button" class="btn btn-primary btn-block btn-success" data-toggle="modal" data-target="#cloud">View Files in Cloud</button>
-  <div class="modal fade" id="cloud" tabindex="-1" role="dialog" aria-labelledby="cloudModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+  <button type="button" id="cloudModalButton" class="btn btn-primary btn-block btn-success d-none" data-toggle="modal" data-target="#cloud">View Files in Cloud</button>
+  <div class="modal fade bd-example-modal-lg" id="cloud" tabindex="-1" role="dialog" aria-labelledby="cloudModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="cloudModalLabel">Files in Cloud</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+            <span class="closeM" aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+          <label for="uploadFile" class="form-label">Upload new files to the cloud</label>
+          <div class="input-group mb-3">
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="uploadFile" required>
+              <label class="custom-file-label text-left" id="currentFileSelected" for="uploadFile">Choose file...</label>
+            </div>
+            <div class="input-group-append">
+              <button class="btn btn-primary" id="pressUploadFile">Button</button>
+            </div>
+          </div>
+          </br>
+          <label class="form-label">Files available in the cloud</label>
+          <div id="files">
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+  <script> 
+    const firebaseConfig = {
+      apiKey: "AIzaSyD8IeE7dbqp1yqerNx3rWY0L-lzMs4wqvg",
+      authDomain: "puppetblocks.firebaseapp.com",
+      projectId: "puppetblocks",
+      storageBucket: "puppetblocks.appspot.com",
+      messagingSenderId: "258474902614",
+      appId: "1:258474902614:web:c5a04fe773b4958a99e7f7"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    function get_cloud_files() {
+      const listRef = firebase.storage().ref();
+      let value = "";
+      listRef.listAll()
+                    .then((res) => {
+                      let counter = 0;
+                      res.items.forEach((itemRef) => {
+                        counter++;
+                        let filename = itemRef.name;
+                        let extension = filename.substring(filename.lastIndexOf('.')+1, filename.length) || filename;
+                        value += "<div style='cursor: default'>" + filename + "<span>" + extension + "</span></div>";
+                      });
+                      if(counter === 0) {
+                        value = "<i>There are currently no available files in the cloud.</i>";
+                      }
+                      document.getElementById("files").innerHTML = value;
+                    }).catch(console.error);
+    }
+
+    document.getElementById("uploadFile").addEventListener("change", function() {
+      const file = document.querySelector("#uploadFile").files[0];
+      const name = file.name;
+      document.getElementById("currentFileSelected").innerHTML = name;
+    });
+
+    document.getElementById("pressUploadFile").addEventListener("click", function() {
+      const ref = firebase.storage().ref();
+      const file = document.querySelector("#uploadFile").files[0];
+      const name = file.name;
+        const metadata = {
+            contentType: file.type,
+        };
+        document.getElementById("pressUploadFile").disabled = true;
+        const task = ref.child(name).put(file, metadata);
+        task
+          .then(snapshot => snapshot.ref.getDownloadURL())
+          .then(url => {
+            console.log(url);
+            get_cloud_files();
+          })
+          .catch(console.error)
+          .finally(() => {
+            document.getElementById("pressUploadFile").disabled = false;
+          });
+    });
+
+    get_cloud_files();
+  </script>
+
   <details open>
   <summary>
   <h2>On device</h2>

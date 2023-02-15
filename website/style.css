@@ -558,7 +558,7 @@ pre.content {
   margin: 0;
   height: 2.5rem;
 }
-#fileList > div, #fileTemplate > div, #blocks2Code > div, #ProjectList > div{
+#fileList > div, #fileTemplate > div, #blocks2Code > div, #ProjectList > div, #files > div{
   display: flex;
   align-items: stretch;
   justify-content: space-between;
@@ -577,7 +577,7 @@ pre.content {
   width: 100%;
   font-family: monospace;
 }
-#fileTemplate > div, #blocks2Code > div  {
+#fileTemplate > div, #blocks2Code > div, #files > div  {
   align-items: center;
   word-break: break-word;
   font-family: monospace;
@@ -587,7 +587,7 @@ pre.content {
   align-items: center;
   word-break: break-word;
 }
-#fileList .runText > span, #blocks2Code > div > span {
+#fileList .runText > span, #blocks2Code > div > span, #files > div > span {
   font-size: 0.8rem;
   border: 1px solid #7b49ad;
   border-radius: .75rem;
@@ -711,6 +711,11 @@ button.icon:before, #deviceSelect.icon:before, a.icon:before, span.icon:before, 
   height: 1.5rem;
   background-size: auto 3rem;
 }
+
+#putFileCloudButton:before {
+  height: 0;
+}
+
 button.icon:before, label.icon:before {
   display:block;
 }
