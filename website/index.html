@@ -356,8 +356,12 @@ document.body.appendChild(el);
                       res.items.forEach((itemRef) => {
                         counter++;
                         let filename = itemRef.name;
+                        let identifier = 'FIREBASE_FILE_' + filename
                         let extension = filename.substring(filename.lastIndexOf('.')+1, filename.length) || filename;
-                        value += "<div style='cursor: default'>" + filename + "<span>" + extension + "</span></div>";
+                        value += "<div style='cursor: default' id='" + identifier + "'>" + filename + "<span>" + extension + "</span></div>";
+                        itemRef.getDownloadURL().then((downloadURL) => {
+                          document.getElementById(identifier).title = downloadURL;
+                        });
                       });
                       if(counter === 0) {
                         value = "<i>There are currently no available files in the cloud.</i>";
