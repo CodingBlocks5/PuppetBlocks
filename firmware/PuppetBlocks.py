@@ -7,6 +7,7 @@ import time
 
 from machine import Pin, ADC
 from servo import Servo
+from framebuf import FrameBuffer, MONO_HLSB
 
 from Screen import Screen
 from Audio import Speaker
@@ -95,7 +96,59 @@ class Movement:
 
 
 class Screens:
-    pass
+    LEFT_SCREEN = 1
+    RIGHT_SCREEN = 2
+    BOTH_SCREENS = 3
+    
+    __leftScreen = Screen(addr=0x3d)
+    __rightScreen = Screen(addr=0x3c)
+
+    @staticmethod
+    def showImage(filename, screen):
+        with open(filename, 'rb') as file:
+            file.readline()
+            file.readline()
+            file.readline()
+            data = bytearray(file.read())
+        file_buffer = FrameBuffer(data, 128, 64, MONO_HLSB)
+        if screen == Screens.LEFT_SCREEN or screen == Screens.BOTH_SCREENS:
+            Screens.__leftScreen.invert(1)
+            Screens.__leftScreen.blit(file_buffer, 0, 0)
+            Screens.__leftScreen.show()
+        if screen == Screens.RIGHT_SCREEN or screen == Screens.BOTH_SCREENS:
+            Screens.__rightScreen.invert(1)
+            Screens.__rightScreen.blit(file_buffer, 0, 0)
+            Screens.__rightScreen.show()
+
+    @staticmethod
+    def showText(text, screen):
+        if screen == Screens.LEFT_SCREEN or screen == Screens.BOTH_SCREENS:
+            Screens.__leftScreen.fill(0)
+            Screens.__leftScreen.text(text, 0, 0, 1)
+            Screens.__leftScreen.show()
+        if screen == Screens.RIGHT_SCREEN or screen == Screens.BOTH_SCREENS:
+            Screens.__rightScreen.fill(0)
+            Screens.__rightScreen.text(text, 0, 0, 1)
+            Screens.__rightScreen.show()
+
+    @staticmethod
+    def blackScreen(screen):
+        if screen == Screens.LEFT_SCREEN or screen == Screens.BOTH_SCREENS:
+            Screens.__leftScreen.fill(0)
+            Screens.__leftScreen.show()
+        if screen == Screens.RIGHT_SCREEN or screen == Screens.BOTH_SCREENS:
+            Screens.__rightScreen.fill(0)
+            Screens.__rightScreen.show()
+
+    @staticmethod
+    def whiteScreen(screen):
+        if screen == Screens.LEFT_SCREEN or screen == Screens.BOTH_SCREENS:
+            Screens.__leftScreen.fill(1)
+            Screens.__leftScreen.show()
+        if screen == Screens.RIGHT_SCREEN or screen == Screens.BOTH_SCREENS:
+            Screens.__rightScreen.fill(1)
+            Screens.__rightScreen.show()
+
 
 class Audio:
     pass

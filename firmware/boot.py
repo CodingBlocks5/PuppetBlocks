@@ -1,36 +1,3 @@
-# screens
-
-from machine import Pin, SPI
-from machine import Pin, SoftI2C
-from Screen import Screen
-from framebuf import FrameBuffer, MONO_HLSB
-
-oled = Screen(addr=0x3d)
-oled1 = Screen(addr=0x3c)
-
-with open('/pymadethis.pbm', 'rb') as f:
-    f.readline()
-    f.readline()
-    f.readline()
-    data = bytearray(f.read())
-fbuf = FrameBuffer(data, 128, 64, MONO_HLSB)
-
-oled.invert(1)
-oled.blit(fbuf, 0, 0)
-oled.show()
-
-with open('/pymadethis.pbm', 'rb') as f:
-    f.readline()
-    f.readline()
-    f.readline()
-    data = bytearray(f.read())
-fbuf1 = FrameBuffer(data, 128, 64, MONO_HLSB)
-
-oled1.invert(1)
-oled1.blit(fbuf1, 0, 0)
-oled1.show()
-
-
 # audio
 
 import os
