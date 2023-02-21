@@ -18,13 +18,12 @@ class Player:
     FLUSH = 3
     STOP = 4
 
-    def __init__(self, id, sck_pin, ws_pin, sd_pin, ibuf, root="/sd/PuppetBlocks"):
+    def __init__(self, id, sck_pin, ws_pin, sd_pin, ibuf):
         self.id = id
         self.sck_pin = sck_pin
         self.ws_pin = ws_pin
         self.sd_pin = sd_pin
         self.ibuf = ibuf
-        self.root = root.rstrip("/") + "/"
         self.state = Player.STOP
         self.wav = None
         self.loop = False

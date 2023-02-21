@@ -13,6 +13,8 @@ from Screen import Screen
 from Audio import Speaker
 
 
+BASE_DIRECTORY = '/sd/PuppetBlock/'
+
 class Movement:
     __servoPitch = Servo(Pin(26))
     __servoRotation = Servo(Pin(14))
@@ -105,7 +107,7 @@ class Screens:
 
     @staticmethod
     def showImage(filename, screen):
-        with open(filename, 'rb') as file:
+        with open(BASE_DIRECTORY + filename, 'rb') as file:
             file.readline()
             file.readline()
             file.readline()
@@ -151,7 +153,34 @@ class Screens:
 
 
 class Audio:
-    pass
+    __speaker = Speaker
+
+    @staticmethod
+    def synchronousPlay(filename, loop):
+        Audio.__speaker.play(filename, loop=loop)
+        while Speaker.isplaying() == True:
+            pass
+
+    @staticmethod
+    def asynchronousPlay(filename, loop):
+        Audio.__speaker.play(filename, loop=loop)
+
+    @staticmethod
+    def pause():
+        Audio.__speaker.pause()
+
+    @staticmethod
+    def resume():
+        Audio.__speaker.resume()
+
+    @staticmethod
+    def stop():
+        Audio.__speaker.stop()
+
+    @staticmethod
+    def isPlaying():
+        return Audio.__speaker.isplaying()
+
 
 class Files:
     pass

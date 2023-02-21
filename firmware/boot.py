@@ -1,28 +1,4 @@
-# audio
-
-import os
-import time
-from Audio import Speaker
-from machine import SDCard
-
-from machine import Pin, SPI
-import machine, os
-sd = machine.SDCard(slot=2, width=1, cd=None, wp=None, sck=Pin(18), miso=Pin(19), mosi=Pin(23), cs=Pin(5), freq=20000000)
-os.mount(sd, "/sd")
-
-Speaker.play("wav_music-16k-16bits-mono.wav", loop=False)
-# wait until the entire WAV file has been played
-while Speaker.isplaying() == True:
-    # other actions can be done inside this loop during playback
-    pass
-
-Speaker.play("wav_music-16k-16bits-mono.wav", loop=False)
-time.sleep(10)  # play for 10 seconds
-Speaker.pause()
-time.sleep(5)  # pause playback for 5 seconds
-Speaker.resume()  # continue playing to the end of the WAV file
-
-# webrepl
+# ---boot:
 
 def do_connect(ssid, pwd):
     import network
@@ -35,16 +11,17 @@ def do_connect(ssid, pwd):
             pass
     print('network config:', sta_if.ifconfig())
 
-# This file is executed on every boot (including wake-boot from deepsleep)
-#import esp
-#esp.osdebug(None)
-
-# Attempt to connect to WiFi network
 do_connect('your_ssid', 'your_password')
 
 import webrepl
 webrepl.start()
 
+from machine import Pin, SPI
+import machine, os
+sd = machine.SDCard(slot=2, width=1, cd=None, wp=None, sck=Pin(18), miso=Pin(19), mosi=Pin(23), cs=Pin(5), freq=20000000)
+os.mount(sd, "/sd")
+
+# ---
 
 
 # time
