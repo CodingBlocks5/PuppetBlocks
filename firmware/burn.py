@@ -5,6 +5,7 @@
 #
 # This file is used for burning ESP32 devices, and not being uploaded to the micro controller.
 #
+import pathlib
 import serial
 import requests
 import tempfile
@@ -13,7 +14,7 @@ import argparse
 
 def main() -> None:
     cl_parser = argparse.ArgumentParser(description='PuppetBlocks - Learn programming with blocks and a puppet.',
-                                        epilog='For help with the synthesizer please read SUPPORT.md .',
+                                        epilog='For help with the burner please read SUPPORT.md .',
                                         allow_abbrev=False)
     cl_parser.add_argument('-m', '--micropython', action='store', type=str,
                             help='the url of the MicroPython firmware (default: v1.19.1)', dest='micropython',
