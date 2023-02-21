@@ -1,33 +1,51 @@
-# ---boot:
+#
+#   @file : boot.py
+#   @authors : PuppetBlocks team
+#   @date : 22 February 2023
+#
 
-def do_connect(ssid, pwd):
-    import network
-    sta_if = network.WLAN(network.STA_IF)
-    if not sta_if.isconnected():
-        print('connecting to network...')
-        sta_if.active(True)
-        sta_if.connect(ssid, pwd)
-        while not sta_if.isconnected():
-            pass
-    print('network config:', sta_if.ifconfig())
+# --- First stage: connect to network
+import network
+import Secrets
 
-do_connect('your_ssid', 'your_password')
+sta_if = network.WLAN(network.STA_IF)
+if not sta_if.isconnected():
+    print('connecting to network...')
+    sta_if.active(True)
+    sta_if.connect(Secrets.NETWORK_ID, Secrets.NETWORK_PASSWORD)
+    while not sta_if.isconnected():
+        pass
+print('Network configuration:', sta_if.ifconfig())
 
-import webrepl
-webrepl.start()
 
-from machine import Pin, SPI
-import machine, os
-sd = machine.SDCard(slot=2, width=1, cd=None, wp=None, sck=Pin(18), miso=Pin(19), mosi=Pin(23), cs=Pin(5), freq=20000000)
-os.mount(sd, "/sd")
-
-import shutil
-import urequests
-import os
-import time
+# --- Second stage: connect to SD card
 import machine
-from machine import Pin, SPI, SPI, SDCard
-from wavplayer import WavPlayer
+import os
 
-sd = machine.SDCard(slot=2, width=1, cd=None, wp=None, sck=Pin(18), miso=Pin(19), mosi=Pin(23), cs=Pin(5), freq=20000000)
+sd = machine.SDCard(
+    slot=2,
+    width=1,
+    cd=None,
+    wp=None,
+    sck=machine.Pin(18),
+    miso=machine.Pin(19),
+    mosi=machine.Pin(23),
+    cs=machine.Pin(5),
+    freq=20000000
+)
 os.mount(sd, "/sd")
+print('SD mounting has completed!')
+
+
+# --- Third stage: update libraries
+import upip
+
+upip.install('webrepl')
+upip.install('shutil')
+upip.install('urequests')
+
+
+# --- Fourth stage: activate webrepl
+import webrepl
+
+webrepl.start()
