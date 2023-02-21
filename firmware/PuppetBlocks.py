@@ -157,13 +157,13 @@ class Audio:
 
     @staticmethod
     def synchronousPlay(filename, loop):
-        Audio.__speaker.play(filename, loop=loop)
+        Audio.__speaker.play(BASE_DIRECTORY + filename, loop=loop)
         while Speaker.isplaying() == True:
             pass
 
     @staticmethod
     def asynchronousPlay(filename, loop):
-        Audio.__speaker.play(filename, loop=loop)
+        Audio.__speaker.play(BASE_DIRECTORY + filename, loop=loop)
 
     @staticmethod
     def pause():

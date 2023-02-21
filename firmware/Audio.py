@@ -100,7 +100,7 @@ class Player:
         elif self.state == Player.PAUSE:
             raise ValueError("paused while playing a WAV file")
         else:
-            self.wav = open(self.root + wav_file, "rb")
+            self.wav = open(wav_file, "rb")
             self.loop = loop
             self.parse(self.wav)
             self.audio_out = I2S(
