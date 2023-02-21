@@ -3,9 +3,12 @@
 #   @authors : PuppetBlocks team
 #   @date : 21 February 2023
 #
+import os
 import time
+import shutil
+import urequests
 
-from machine import Pin, ADC
+from machine import Pin, ADC, RTC
 from servo import Servo
 from framebuf import FrameBuffer, MONO_HLSB
 
@@ -16,14 +19,14 @@ from Audio import Speaker
 BASE_DIRECTORY = '/sd/PuppetBlock/'
 
 class Movement:
-    __servoPitch = Servo(Pin(26))
-    __servoRotation = Servo(Pin(14))
-    __joystickPitch = ADC(Pin(39))
-    __joystickRotation = ADC(Pin(36))
-    __valuePitch = 0
-    __valueRotation = 0
-    __recording = [(0, 0) for _ in range(50)]
-    __isInitialized = False
+    __servoPitch        = Servo(Pin(26))
+    __servoRotation     = Servo(Pin(14))
+    __joystickPitch     = ADC(Pin(39))
+    __joystickRotation  = ADC(Pin(36))
+    __valuePitch        = 0
+    __valueRotation     = 0
+    __recording         = [(0, 0) for _ in range(50)]
+    __isInitialized     = False
 
     @staticmethod
     def __initialize():
@@ -98,9 +101,9 @@ class Movement:
 
 
 class Screens:
-    LEFT_SCREEN = 1
-    RIGHT_SCREEN = 2
-    BOTH_SCREENS = 3
+    LEFT_SCREEN     = 1
+    RIGHT_SCREEN    = 2
+    BOTH_SCREENS    = 3
     
     __leftScreen = Screen(addr=0x3d)
     __rightScreen = Screen(addr=0x3c)
@@ -183,7 +186,111 @@ class Audio:
 
 
 class Files:
-    pass
+
+    @staticmethod
+    def loadFile(filename, url):
+        request = urequests.get(url, stream=True)
+        if request.status_code == 200:
+            with open(BASE_DIRECTORY + filename, 'wb') as file:
+                shutil.copyfileobj(request.raw, file)
+        print('The file has downloaded!')
+
+    @staticmethod
+    def fileExists(filename):
+        return os.path.isfile(BASE_DIRECTORY + filename)
+
+    @staticmethod
+    def deleteFile(filename):
+        os.remove(BASE_DIRECTORY + filename)
+
+    @staticmethod
+    def renameFile(filename, newname):
+        os.rename(BASE_DIRECTORY + filename, BASE_DIRECTORY + newname)
+
+    @staticmethod
+    def listFiles():
+        return os.listdir(BASE_DIRECTORY)
+
 
 class Time:
-    pass
+    YEAR        = 1
+    MONTH       = 2
+    DAY         = 3
+    HOUR        = 4
+    MINUTE      = 5
+    SECOND      = 6
+
+    __RTC       = RTC()
+
+    @staticmethod
+    def __timeToInt(time):
+        (year, month, day, hour, minute, second) = time
+        return  365 * 24 * 60 * 60 * year + \
+                30 * 24 * 60 * 60 * month + \
+                24 * 60 * 60 * day + \
+                60 * 60 * hour + \
+                60 * minute + \
+                second
+
+    @staticmethod
+    def sleep(length, unit):
+        if unit == Time.YEAR:
+            time.sleep(365 * 24 * 60 * 60 * unit)
+        elif unit == Time.MONTH:
+            time.sleep(30 * 24 * 60 * 60 * unit)
+        elif unit == Time.DAY:
+            time.sleep(24 * 60 * 60 * unit)
+        elif unit == Time.HOUR:
+            time.sleep(60 * 60 * unit)
+        elif unit == Time.MINUTE:
+            time.sleep(60 * unit)
+        elif unit == Time.SECOND:
+            time.sleep(unit)
+
+    @staticmethod
+    def sleepUntil(time):
+        current_time = Time.__timeToInt(Time.getTime())
+        while current_time < time:
+            time.sleep(0.1)
+            current_time = Time.__timeToInt(Time.getTime())
+
+    @staticmethod
+    def getTime():
+        (year, month, day, _, hour, minute, second, _) = Time.__RTC.datetime()
+        return (year, month, day, hour, minute, second)
+
+    @staticmethod
+    def addTime(time, value, unit):
+        (year, month, day, hour, minute, second) = time
+        if unit == Time.YEAR:
+            return (year + value, month, day, hour, minute, second)
+        elif unit == Time.MONTH:
+            return (year, month + value, day, hour, minute, second)
+        elif unit == Time.DAY:
+            return (year, month, day + value, hour, minute, second)
+        elif unit == Time.HOUR:
+            return (year, month, day, hour + value, minute, second)
+        elif unit == Time.MINUTE:
+            return (year, month, day, hour, minute + value, second)
+        elif unit == Time.SECOND:
+            return (year, month, day, hour, minute, second + value)
+        else:
+            return (year, month, day, hour, minute, second)
+
+    @staticmethod
+    def getTimeUnit(unit):
+        (year, month, day, hour, minute, second) = Time.getTime()
+        if unit == Time.YEAR:
+            return year
+        elif unit == Time.MONTH:
+            return month
+        elif unit == Time.DAY:
+            return day
+        elif unit == Time.HOUR:
+            return hour
+        elif unit == Time.MINUTE:
+            return minute
+        elif unit == Time.SECOND:
+            return second
+        else:
+            return -1
