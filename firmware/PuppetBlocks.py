@@ -1,3 +1,36 @@
+# screens
+
+from machine import Pin, SPI
+from machine import Pin, SoftI2C
+from Screen import Screen
+from framebuf import FrameBuffer, MONO_HLSB
+
+oled = Screen(addr=0x3d)
+oled1 = Screen(addr=0x3c)
+
+with open('/pymadethis.pbm', 'rb') as f:
+    f.readline()
+    f.readline()
+    f.readline()
+    data = bytearray(f.read())
+fbuf = FrameBuffer(data, 128, 64, MONO_HLSB)
+
+oled.invert(1)
+oled.blit(fbuf, 0, 0)
+oled.show()
+
+with open('/pymadethis.pbm', 'rb') as f:
+    f.readline()
+    f.readline()
+    f.readline()
+    data = bytearray(f.read())
+fbuf1 = FrameBuffer(data, 128, 64, MONO_HLSB)
+
+oled1.invert(1)
+oled1.blit(fbuf1, 0, 0)
+oled1.show()
+
+
 # potentiometer + servo
 
 from machine import Pin, ADC
@@ -12,7 +45,7 @@ y.atten(ADC.ATTN_11DB)
 servo_x = Servo(Pin(26))
 servo_y = Servo(Pin(14))
 
-while True:
+while False:
 	print("x = ", x.read() / 4096 * 360)
 	print("y = ", y.read() / 4096 * 360)
 	servo_x.write_angle(int(x.read() / 4096 * 360))
@@ -42,6 +75,7 @@ do_connect('your_ssid', 'your_password')
 
 import webrepl
 webrepl.start()
+
 
 
 # time
