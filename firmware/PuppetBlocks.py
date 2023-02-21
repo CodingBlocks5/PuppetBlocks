@@ -1,166 +1,107 @@
-# screens
-
-from machine import Pin, SPI
-from machine import Pin, SoftI2C
-from Screen import Screen
-from framebuf import FrameBuffer, MONO_HLSB
-
-oled = Screen(addr=0x3d)
-oled1 = Screen(addr=0x3c)
-
-with open('/pymadethis.pbm', 'rb') as f:
-    f.readline()
-    f.readline()
-    f.readline()
-    data = bytearray(f.read())
-fbuf = FrameBuffer(data, 128, 64, MONO_HLSB)
-
-oled.invert(1)
-oled.blit(fbuf, 0, 0)
-oled.show()
-
-with open('/pymadethis.pbm', 'rb') as f:
-    f.readline()
-    f.readline()
-    f.readline()
-    data = bytearray(f.read())
-fbuf1 = FrameBuffer(data, 128, 64, MONO_HLSB)
-
-oled1.invert(1)
-oled1.blit(fbuf1, 0, 0)
-oled1.show()
-
-
-# audio
-
-import os
+#
+#   @file : PuppetBlock.py
+#   @authors : PuppetBlocks team
+#   @date : 21 February 2023
+#
 import time
-from Audio import Speaker
-from machine import SDCard
-
-from machine import Pin, SPI
-import machine, os
-sd = machine.SDCard(slot=2, width=1, cd=None, wp=None, sck=Pin(18), miso=Pin(19), mosi=Pin(23), cs=Pin(5), freq=20000000)
-os.mount(sd, "/sd")
-
-Speaker.play("wav_music-16k-16bits-mono.wav", loop=False)
-# wait until the entire WAV file has been played
-while Speaker.isplaying() == True:
-    # other actions can be done inside this loop during playback
-    pass
-
-Speaker.play("wav_music-16k-16bits-mono.wav", loop=False)
-time.sleep(10)  # play for 10 seconds
-Speaker.pause()
-time.sleep(5)  # pause playback for 5 seconds
-Speaker.resume()  # continue playing to the end of the WAV file
-
-# potentiometer + servo
 
 from machine import Pin, ADC
 from servo import Servo
-from time import sleep
 
-x = ADC(Pin(39))
-y = ADC(Pin(36))
-x.atten(ADC.ATTN_11DB)
-y.atten(ADC.ATTN_11DB)
-
-servo_x = Servo(Pin(26))
-servo_y = Servo(Pin(14))
-
-while False:
-	print("x = ", x.read() / 4096 * 360)
-	print("y = ", y.read() / 4096 * 360)
-	servo_x.write_angle(int(x.read() / 4096 * 360))
-	servo_y.write_angle(int(y.read() / 4096 * 360))
-	sleep(0.25)
+from Screen import Screen
+from Audio import Speaker
 
 
-# webrepl
+class Movement:
+    __servoPitch = Servo(Pin(26))
+    __servoRotation = Servo(Pin(14))
+    __joystickPitch = ADC(Pin(39))
+    __joystickRotation = ADC(Pin(36))
+    __valuePitch = 0
+    __valueRotation = 0
+    __recording = [(0, 0) for _ in range(50)]
+    __isInitialized = False
 
-def do_connect(ssid, pwd):
-    import network
-    sta_if = network.WLAN(network.STA_IF)
-    if not sta_if.isconnected():
-        print('connecting to network...')
-        sta_if.active(True)
-        sta_if.connect(ssid, pwd)
-        while not sta_if.isconnected():
-            pass
-    print('network config:', sta_if.ifconfig())
+    @staticmethod
+    def __initialize():
+        if not Movement.__isInitialized:
+            Movement.__joystickPitch.atten(ADC.ATTN_11DB)
+            Movement.__joystickRotation.atten(ADC.ATTN_11DB)
 
-# This file is executed on every boot (including wake-boot from deepsleep)
-#import esp
-#esp.osdebug(None)
+    @staticmethod
+    def __linespace(start, stop, length):
+        start, stop, length = float(start), float(stop), int(length)
+        if length == 1:
+            yield stop
+        else:
+            step = (stop - start) / length
+            for index in range(length):
+                yield start + step * index
 
-# Attempt to connect to WiFi network
-do_connect('your_ssid', 'your_password')
+    @staticmethod
+    def setPitch(value):
+        if not Movement.__servoPitch:
+            Movement.__initialize()
+        angle = int(value)
+        Movement.__servoPitch.write_angle(angle)
+        Movement.__valuePitch = angle
 
-import webrepl
-webrepl.start()
+    @staticmethod
+    def setRotation(value):
+        if not Movement.__servoRotation:
+            Movement.__initialize()
+        angle = int(value)
+        Movement.__servoRotation.write_angle(angle)
+        Movement.__valueRotation = angle
+
+    @staticmethod
+    def slidePitch(value, length):
+        for val in Movement.__linespace(Movement.__valuePitch, value, length):
+            Movement.setPitch(val)
+            time.sleep(0.1)
+        Movement.setPitch(value)
+
+    @staticmethod
+    def slideRotation(value, length):
+        for val in Movement.__linespace(Movement.__valueRotation, value, length):
+            Movement.setRotation(val)
+            time.sleep(0.1)
+        Movement.setRotation(value)
+
+    @staticmethod
+    def getPitch():
+        Movement.__initialize()
+        return Movement.__joystickPitch.read() / 4096
+
+    @staticmethod
+    def getRotation():
+        Movement.__initialize()
+        return Movement.__joystickRotation.read() / 4096
+
+    @staticmethod
+    def recordJoystick():
+        Movement.__initialize()
+        Movement.__recording = []
+        for _ in range(50):
+            Movement.__recording.append((Movement.getPitch(), Movement.getRotation()))
+            time.sleep(0.1)
+
+    @staticmethod
+    def performRecording():
+        for pitch, rotation in Movement.__recording:
+            Movement.setPitch(pitch)
+            Movement.setRotation(rotation)
+            time.sleep(0.1)
 
 
+class Screens:
+    pass
 
-# time
+class Audio:
+    pass
 
-from machine import RTC
-import ntptime
-import time
+class Files:
+    pass
 
-rtc = RTC()
-ntptime.settime()
-(year, month, day, weekday, hours, minutes, seconds, subseconds) = rtc.datetime()
-print ("UTC Time: ")
-print((year, month, day, hours, minutes, seconds))
-
-sec = ntptime.time()
-timezone_hour = 5.50
-timezone_sec = timezone_hour * 3600
-sec = int(sec + timezone_sec)
-(year, month, day, hours, minutes, seconds, weekday, yearday) = time.localtime(sec)
-print ("IST Time: ")
-print((year, month, day, hours, minutes, seconds))
-rtc.datetime((year, month, day, 0, hours, minutes, seconds, 0))
-disconnect()
-
-# file download
-
-import shutil
-import urequests
-import os
-import time
-import machine
-from machine import Pin, SPI, SPI, SDCard
-from wavplayer import WavPlayer
-
-sd = machine.SDCard(slot=2, width=1, cd=None, wp=None, sck=Pin(18), miso=Pin(19), mosi=Pin(23), cs=Pin(5), freq=20000000)
-os.mount(sd, "/sd")
-
-url = 'https://firebasestorage.googleapis.com/v0/b/puppetblocks.appspot.com/o/music-16k-32bits-mono.wav?alt=media&token=93f5266b-e6c0-498f-a6a9-0f1e892d4df3'
-local_filename = url.split('?')[0].split('/')[-1]
-r = urequests.get(url, stream=True)
-if r.status_code == 200:
-    with open('/sd/PB/{}'.format(local_filename), 'wb') as f:
-        shutil.copyfileobj(r.raw, f)
-print('The file has downloaded!')
-
-SCK_PIN = 32
-WS_PIN = 25
-SD_PIN = 33
-I2S_ID = 0
-BUFFER_LENGTH_IN_BYTES = 40000
-
-wp = WavPlayer(
-    id=I2S_ID,
-    sck_pin=Pin(SCK_PIN),
-    ws_pin=Pin(WS_PIN),
-    sd_pin=Pin(SD_PIN),
-    ibuf=BUFFER_LENGTH_IN_BYTES,
-)
-
-wp.play(local_filename , loop=False)
-time.sleep(10)
-wp.pause()
-time.sleep(5)
-wp.resume()
+class Time:
+    pass
