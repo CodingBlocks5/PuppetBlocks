@@ -50,7 +50,32 @@ an academic semester and is released under GNU General Public License v3.0.
 
 ## Website
 
-? + firebase
+The main way in which the elementary school students interact with the system is using the website, available
+on [https://codingblocks5.github.io/PuppetBlocks/](https://codingblocks5.github.io/PuppetBlocks/). This is a static,
+single page frontend-based website, written in HTML, CSS, and JavaScript, allowing the students to program the
+micro-controller. Beside the general blocks that were presented in BIPES, there are 31 unique blocks intend to
+help the student interact with the device.
+
+The following block categories were added:
+- **Movement** - these blocks are used to control the two servo motors, read the joystick, record movements and
+performing them.
+- **Screens** - these blocks are used to control the two screens independently, allowing showing images and text 
+and providing fast whitening and blacking function.
+- **Audio** - these blocks are used to control the speaker, allowing playing audio synchronously or asynchronously,
+once or in loop, and providing easy functions for pausing, resuming, stopping, and checking whether the speaker is
+currently playing.
+- **Files** - these blocks are used to load files from the cloud to the device, to check whether a file exists, to
+delete a file on the device, to rename a file on the device, and to get a list of all currently available files on
+the device.
+- **Time** - these blocks are used to sleep for a specified time or until a specified time, to get the current time
+or get a unit of it, and to do basic arithmetical calculations connected with time.
+
+Downloading files to the device require previous uploading to the PuppetBlocks cloud, which is stored in PuppetBlocks'
+Cloud Storage for Firebase. The website allows a simple uploading and viewing a list of all currently available files
+in the cloud. Executing the code is possible either using a serial (USB) connection or using WiFi with MicroPython WebREPL.
+It is possible to download the current code to a local file and to upload previously downloaded files from the local computer.
+The interface is available on English, with a basic support for Hebrew, Arabic, Italian, and Russian.
+
 
 ## Project Engineering
 
