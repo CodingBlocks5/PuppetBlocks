@@ -98,6 +98,13 @@ class Movement:
         return (1.0 - (Movement.__joystickRotation.read() / 4096)) * 360
 
     @staticmethod
+    def performLive(length):
+        for _ in range(length * 10):
+            Movement.setPitch(Movement.getPitch())
+            Movement.setRotation(Movement.getRotation())
+            time.sleep(0.1)
+
+    @staticmethod
     def recordJoystick():
         Movement.__initialize()
         Movement.__recording = []
