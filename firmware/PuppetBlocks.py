@@ -159,7 +159,7 @@ class Screens:
     @staticmethod
     def blackScreen(screen):
         if screen == Screens.LEFT_SCREEN or screen == Screens.BOTH_SCREENS:
-            Screens.__leftScreen.fill(1)
+            Screens.__leftScreen.fill(0)
             Screens.__leftScreen.show()
         if screen == Screens.RIGHT_SCREEN or screen == Screens.BOTH_SCREENS:
             Screens.__rightScreen.fill(0)
@@ -168,7 +168,7 @@ class Screens:
     @staticmethod
     def whiteScreen(screen):
         if screen == Screens.LEFT_SCREEN or screen == Screens.BOTH_SCREENS:
-            Screens.__leftScreen.fill(0)
+            Screens.__leftScreen.fill(1)
             Screens.__leftScreen.show()
         if screen == Screens.RIGHT_SCREEN or screen == Screens.BOTH_SCREENS:
             Screens.__rightScreen.fill(1)
