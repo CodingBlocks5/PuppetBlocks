@@ -70,11 +70,12 @@ the device.
 - **Time** - these blocks are used to sleep for a specified time or until a specified time, to get the current time
 or get a unit of it, and to do basic arithmetical calculations connected with time.
 
-Downloading files to the device require previous uploading to the PuppetBlocks cloud, which is stored in PuppetBlocks'
-Cloud Storage for Firebase. The website allows a simple uploading and viewing a list of all currently available files
-in the cloud. Executing the code is possible either using a serial (USB) connection or using WiFi with MicroPython WebREPL.
-It is possible to download the current code to a local file and to upload previously downloaded files from the local computer.
-The interface is available on English, with a basic support for Hebrew, Arabic, Italian, and Russian.
+Downloading files to the device require previous uploading to the PuppetBlocks cloud, which is stored in Cloud
+Storage for Firebase. The website allows a simple uploading and viewing a list of all currently available files
+in the cloud. Executing the code is possible either using a serial (USB) connection or using WiFi with MicroPython
+WebREPL. It is possible to download the current code to a local file and to upload previously downloaded files
+from the local computer. The interface is available on English, with a basic support for Hebrew, Arabic, Italian,
+and Russian.
 
 
 ## Project Engineering
