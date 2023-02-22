@@ -6693,3 +6693,29 @@ Blockly.Python['listFiles'] = function(block) {
 	var code = 'PuppetBlocks.Files.listFiles()';
 	return [code, Blockly.Python.ORDER_NONE];
 };
+
+
+// Time
+
+Blockly.Python['sleepLibrary'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var value_length = Blockly.Python.valueToCode(block, 'length', Blockly.Python.ORDER_ATOMIC);
+	var dropdown_unit = block.getFieldValue('unit');
+	var code = 'PuppetBlocks.Time.sleep(' + value_length + ', ' +  dropdown_unit + ')\n';
+	return code;
+};
+
+Blockly.Python['sleepUntil'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var value_until = Blockly.Python.valueToCode(block, 'until', Blockly.Python.ORDER_ATOMIC);
+	var code = 'PuppetBlocks.Time.sleepUntil(' + value_until + ')\n';
+	return code;
+};
+
+Blockly.Python['getTime'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var code = 'PuppetBlocks.Time.getTime()';
+	return [code, Blockly.Python.ORDER_NONE];
+};
+
+

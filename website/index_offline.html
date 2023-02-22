@@ -31,7 +31,6 @@ function setCookie(cname, cvalue, cpassword_value, exdays) {
 function getCookie(cname) {
   var name = cname + "=";
   var ca = document.cookie.split(';');
-  console.log(ca)
   for(var i = 0; i < ca.length; i++) {
     var c = ca[i];
     while (c.charAt(0) == ' ') {
@@ -763,7 +762,6 @@ function loadPage() {
 	if (x) {
 		console.log('Not showing splash');
 	} else {
-		console.log('Showing splash');
 		modal.style.display = "block";
 	}
 }
@@ -1211,7 +1209,20 @@ function eraseCookieModal(name) {
     </category>
 
     <category name="Time" colour="110">
-      <block type="controls_if"></block>
+      <block type="sleepLibrary">
+        <value name="length">
+          <shadow type="math_number">
+            <field name="NUM"></field>
+          </shadow>
+        </value>
+      </block>
+      <block type="sleepUntil">
+        <value name="until">
+          <shadow type="getTime">
+          </shadow>
+        </value>
+      </block>
+      <block type="getTime"></block>
     </category>
 
 </document>

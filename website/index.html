@@ -30,7 +30,6 @@ function setCookie(cname, cvalue, cpassword_value, exdays) {
 function getCookie(cname) {
   var name = cname + "=";
   var ca = document.cookie.split(';');
-  console.log(ca)
   for(var i = 0; i < ca.length; i++) {
     var c = ca[i];
     while (c.charAt(0) == ' ') {
@@ -762,7 +761,6 @@ function loadPage() {
 	if (x) {
 		console.log('Not showing splash');
 	} else {
-		console.log('Showing splash');
 		modal.style.display = "block";
 	}
 }

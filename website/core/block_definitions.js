@@ -24928,7 +24928,7 @@ Blockly.Blocks['renameFile'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(80);
-    this.setTooltip("rename_file");
+    this.setTooltip("rename file");
     this.setHelpUrl("#");
   }
 };
@@ -24940,7 +24940,60 @@ Blockly.Blocks['listFiles'] = {
     this.setInputsInline(true);
     this.setOutput(true, "Array");
     this.setColour(80);
-    this.setTooltip("get_files");
+    this.setTooltip("get files");
     this.setHelpUrl("#");
   }
 };
+
+
+// Time
+
+Blockly.Blocks['sleepLibrary'] = {
+  init: function() {
+    this.appendValueInput("length")
+        .setCheck("Number")
+        .appendField("sleep for");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["seconds","PuppetBlocks.Time.SECOND"],
+                                                ["minutes","PuppetBlocks.Time.MINUTE"],
+                                                ["hours","PuppetBlocks.Time.HOUR"],
+                                                ["days","PuppetBlocks.Time.DAY"],
+                                                ["months","PuppetBlocks.Time.MONTH"],
+                                                ["years","PuppetBlocks.Time.YEAR"]]), "unit");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(110);
+    this.setTooltip("sleep for specified time");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['sleepUntil'] = {
+  init: function() {
+    this.appendValueInput("until")
+        .setCheck("PuppetBlocksTime")
+        .appendField("sleep until");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(110);
+    this.setTooltip("sleep until specified time");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['getTime'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("get current time");
+    this.setInputsInline(true);
+    this.setOutput(true, "PuppetBlocksTime");
+    this.setColour(110);
+    this.setTooltip("get current time");
+    this.setHelpUrl("#");
+  }
+};
+
+
+
+
+
