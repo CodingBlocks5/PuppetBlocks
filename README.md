@@ -36,7 +36,7 @@ This work is submitted as the final project in the course "Project in The Intern
 Computer Science, Technion - Israel Institute of Technology. This project was written by
 Orel Adivi `(orel.adivi [at] cs.technion.ac.il)`, Hila Ginzburg
 `(hila.gin [at] campus.technion.ac.il)`, and Noy Shmueli `(noyshmueli [at] campus.technion.ac.il)`,
-and under the supervision of Assel Aborokn, Tom Sofer, and dr. Itai Dabran. The work was done in about
+and under the supervision of Assel Aborokn, Tom Sofer, and Itai Dabran, Ph.D. . The work was done in about
 an academic semester and is released under GNU General Public License v3.0.
 
 
