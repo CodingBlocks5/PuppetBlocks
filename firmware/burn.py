@@ -6,7 +6,7 @@
 # This file is used for burning ESP32 devices, and not being uploaded to the micro controller.
 #
 import pathlib
-import serial
+import subprocess
 import requests
 import tempfile
 import argparse
@@ -23,72 +23,38 @@ def main() -> None:
                             help='the root for esptool.exe', dest='esptool')
     cl_parser.add_argument('-c', '--connection', action='store', type=str, required=True,
                             help='the connection to the device (usually COM4)', dest='connection')
-    cl_parser.add_argument('-s', '--ssid', action='store', type=str, required=True,
-                            help='the SSID of the network', dest='network_id')
-    cl_parser.add_argument('-p', '--password', action='store', type=str, required=True,
-                            help='the password of the network', dest='network_password')
     arguments = cl_parser.parse_args()
 
     micropython = arguments.micropython
     esptool = arguments.esptool
     connection = arguments.connection
-    network_id = arguments.network_id
-    network_password = arguments.network_password
 
-    with tempfile.NamedTemporaryFile() as file:
-
-        # First stage: download MicroPython
+    # First stage: download MicroPython
+    with tempfile.NamedTemporaryFile(delete=False) as file:
         response = requests.get(micropython)
         file.write(response.content)
+        address = file.name
         print('--- PuppetBlocks BURNER: MicroPython file has downloaded successfully! ---')
 
-        # Second stage: burn firmware
-        cmd = [
-            esptool,
-            '--chip esp32',
-            '--port',
-            connection,
-            '--baud 921600',
-            '--before default_reset',
-            '--after hard_reset',
-            '--erase-all',
-            'write_flash -z',
-            '--flash_mode dio',
-            '--flash_freq 80m',
-            '--flash_size 4MB',
-            '0x1000',
-            file.name
-        ]
-        full_cmd = ' '.join(cmd)
-        exec(full_cmd)
-        print('--- PuppetBlocks BURNER: MicroPython firmware has burned! ---')
-    
-    with tempfile.NamedTemporaryFile() as file:
-
-        # Third stage: create 'Secrets.py' file 
-        content = f'NETWORK_ID = "{network_id}"; NETWORK_PASSWORD = "{network_password}"\n'
-        file.write(content.encode('utf-8'))
-        file.seek(0)
-        print('--- PuppetBlocks BURNER: Secrets.py file has been created! ---')
-
-        # Fourth stage: set standard library
-        files = {
-            'Audio.py': open('Audio.py', 'rb'),
-            'boot.py': open('boot.py', 'rb'),
-            'PuppetBlocks.py': open('PuppetBlocks.py', 'rb'),
-            'Screen.py': open('Screen.py', 'rb'),
-            'Secrets.py': file,
-        }
-        with serial.Serial(connection, 115200, timeout=5, rtscts=False, dsrdtr=False) as serial_connection:
-            for name, file_stream in files.items():
-                content = file_stream.read()
-                length = len(content)
-                code =  f'import sys\n' + \
-                        f'with open("{name}", "wb") as file:\n' + \
-                        f'\tfile.write(sys.stdin.buffer.read({length}))\n\n'
-                serial_connection.write(code.encode('utf-8'))
-                serial_connection.write(content)
-        print('--- PuppetBlocks BURNER: Standard library has installed! ---')
+    # Second stage: burn firmware
+    cmd = [
+        str(esptool),
+        '--chip esp32',
+        '--port',
+        connection,
+        '--baud 921600',
+        '--before default_reset',
+        '--after hard_reset',
+        'write_flash -z',
+        '--flash_mode dio',
+        '--flash_freq 80m',
+        '--flash_size 4MB',
+        '0x1000',
+        address
+    ]
+    full_cmd = ' '.join(cmd)
+    subprocess.run(full_cmd, shell=True)
+    print('--- PuppetBlocks BURNER: MicroPython firmware has burned! ---')
 
 
 if __name__ == '__main__':
