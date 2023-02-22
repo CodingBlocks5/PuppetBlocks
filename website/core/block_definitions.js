@@ -24760,6 +24760,72 @@ Blockly.Blocks['whiteScreen'] = {
 };
 
 
+// Audio
+
+Blockly.Blocks['synchronousPlay'] = {
+  init: function() {
+    this.appendValueInput("file")
+        .setCheck("String")
+        .appendField("play file");
+    this.appendDummyInput()
+        .appendField("synchronously");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(50);
+    this.setTooltip("play file synchronously");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['asynchronousPlay'] = {
+  init: function() {
+    this.appendValueInput("file")
+        .setCheck("String")
+        .appendField("play file");
+    this.appendDummyInput()
+        .appendField("asynchronously");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(50);
+    this.setTooltip("play file asynchronously");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['synchronousPlayLoop'] = {
+  init: function() {
+    this.appendValueInput("file")
+        .setCheck("String")
+        .appendField("play file");
+    this.appendDummyInput()
+        .appendField("synchronously in a loop");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(50);
+    this.setTooltip("play file synchronously in a loop");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['asynchronousPlayLoop'] = {
+  init: function() {
+    this.appendValueInput("file")
+        .setCheck("String")
+        .appendField("play file");
+    this.appendDummyInput()
+        .appendField("asynchronously in a loop");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(50);
+    this.setTooltip("play file asynchronously in a loop");
+    this.setHelpUrl("#");
+  }
+};
+
+
+
+
+
 // Files
 
 Blockly.Blocks['load_file'] = {

@@ -6600,6 +6600,38 @@ Blockly.Python['whiteScreen'] = function(block) {
 };
 
 
+// Audio
+
+Blockly.Python['synchronousPlay'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var value_file = Blockly.Python.valueToCode(block, 'file', Blockly.Python.ORDER_ATOMIC);
+	var code = 'PuppetBlocks.Audio.synchronousPlay(' + value_file + ', False)\n';
+	return code;
+};
+
+Blockly.Python['asynchronousPlay'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var value_file = Blockly.Python.valueToCode(block, 'file', Blockly.Python.ORDER_ATOMIC);
+	var code = 'PuppetBlocks.Audio.asynchronousPlay(' + value_file + ', False)\n';
+	return code;
+};
+
+Blockly.Python['synchronousPlayLoop'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var value_file = Blockly.Python.valueToCode(block, 'file', Blockly.Python.ORDER_ATOMIC);
+	var code = 'PuppetBlocks.Audio.synchronousPlay(' + value_file + ', True)\n';
+	return code;
+};
+
+Blockly.Python['asynchronousPlayLoop'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var value_file = Blockly.Python.valueToCode(block, 'file', Blockly.Python.ORDER_ATOMIC);
+	var code = 'PuppetBlocks.Audio.asynchronousPlay(' + value_file + ', True)\n';
+	return code;
+};
+
+
+
 
 // Files
 

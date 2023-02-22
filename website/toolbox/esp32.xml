@@ -301,7 +301,7 @@
       <block type="showImage">
         <value name="file">
           <shadow type="text">
-            <field name="TEXT">replrepl.pbm</field>
+            <field name="TEXT">image.pbm</field>
           </shadow>
         </value>
       </block>
@@ -317,7 +317,13 @@
     </category>
 
     <category name="Audio" colour="50">
-      <block type="controls_if"></block>
+      <block type="synchronousPlay">
+        <value name="file">
+          <shadow type="text">
+            <field name="TEXT">Hello, World!</field>
+          </shadow>
+        </value>
+      </block>
     </category>
 
     <category name="Files" colour="80">
