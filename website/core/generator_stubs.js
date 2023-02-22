@@ -6650,7 +6650,7 @@ Blockly.Python['stop'] = function(block) {
 
 Blockly.Python['isPlaying'] = function(block) {
 	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
-	var code = 'PuppetBlocks.Movement.isPlaying()';
+	var code = 'PuppetBlocks.Audio.isPlaying()';
 	return [code, Blockly.Python.ORDER_NONE];
 };
 
