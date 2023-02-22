@@ -24558,11 +24558,11 @@ Blockly.Blocks['mpu9250_temp'] = {
 
 // Movement
 
-Blockly.Blocks['set_servo_x'] = {
+Blockly.Blocks['setPitch'] = {
   init: function() {
-    this.appendValueInput("part")
-        .setCheck("Number")
-        .appendField("set pitch to");
+    this.appendDummyInput()
+        .appendField("set pitch to")
+        .appendField(new Blockly.FieldAngle(180), "part");
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -24572,11 +24572,11 @@ Blockly.Blocks['set_servo_x'] = {
   }
 };
 
-Blockly.Blocks['set_servo_y'] = {
+Blockly.Blocks['setRotation'] = {
   init: function() {
-    this.appendValueInput("part")
-        .setCheck("Number")
-        .appendField("set rotation to");
+    this.appendDummyInput()
+        .appendField("set rotation to")
+        .appendField(new Blockly.FieldAngle(180), "part");
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -24586,11 +24586,11 @@ Blockly.Blocks['set_servo_y'] = {
   }
 };
 
-Blockly.Blocks['slide_servo_x'] = {
+Blockly.Blocks['slidePitch'] = {
   init: function() {
-    this.appendValueInput("part")
-        .setCheck("Number")
-        .appendField("set pitch to");
+    this.appendDummyInput()
+        .appendField("set pitch to")
+        .appendField(new Blockly.FieldAngle(180), "part");
     this.appendValueInput("time")
         .setCheck("Number")
         .appendField("for");
@@ -24605,11 +24605,11 @@ Blockly.Blocks['slide_servo_x'] = {
   }
 };
 
-Blockly.Blocks['slide_servo_y'] = {
+Blockly.Blocks['slideRotation'] = {
   init: function() {
-    this.appendValueInput("part")
-        .setCheck("Number")
-        .appendField("set rotation to");
+    this.appendDummyInput()
+        .appendField("set rotation to")
+        .appendField(new Blockly.FieldAngle(180), "part");
     this.appendValueInput("time")
         .setCheck("Number")
         .appendField("for");
@@ -24624,7 +24624,7 @@ Blockly.Blocks['slide_servo_y'] = {
   }
 };
 
-Blockly.Blocks['get_servo_x'] = {
+Blockly.Blocks['getPitch'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("get pitch");
@@ -24635,7 +24635,7 @@ Blockly.Blocks['get_servo_x'] = {
   }
 };
 
-Blockly.Blocks['get_servo_y'] = {
+Blockly.Blocks['getRotation'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("get rotation");
@@ -24646,27 +24646,116 @@ Blockly.Blocks['get_servo_y'] = {
   }
 };
 
-Blockly.Blocks['record_joystick'] = {
+Blockly.Blocks['performLive'] = {
+  init: function() {
+    this.appendValueInput("time")
+        .setCheck("Number")
+        .appendField("perform live for");
+    this.appendDummyInput()
+        .appendField("second");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(350);
+    this.setTooltip("set rotation to");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['recordJoystick'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("record joystick");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(350);
-  this.setTooltip("record joystick");
-  this.setHelpUrl("#");
+    this.setTooltip("record joystick");
+    this.setHelpUrl("#");
   }
 };
 
-Blockly.Blocks['perform_recording'] = {
+Blockly.Blocks['performRecording'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("perform recording");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(350);
-  this.setTooltip("perform recording");
-  this.setHelpUrl("#");
+    this.setTooltip("perform recording");
+    this.setHelpUrl("#");
+  }
+};
+
+
+// Screens
+
+Blockly.Blocks['showImage'] = {
+  init: function() {
+    this.appendValueInput("file")
+        .setCheck("String")
+        .appendField("show image");
+    this.appendDummyInput()
+        .appendField("on")
+        .appendField(new Blockly.FieldDropdown([["left","PuppetBlocks.Screens.LEFT_SCREEN"],
+                                                ["right","PuppetBlocks.Screens.RIGHT_SCREEN"],
+                                                ["both","PuppetBlocks.Screens.BOTH_SCREEN"]]), "screen")
+        .appendField("screen");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(20);
+    this.setTooltip("show image on screen");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['showText'] = {
+  init: function() {
+    this.appendValueInput("text")
+        .setCheck("String")
+        .appendField("show text");
+    this.appendDummyInput()
+        .appendField("on")
+        .appendField(new Blockly.FieldDropdown([["left","PuppetBlocks.Screens.LEFT_SCREEN"],
+                                                ["right","PuppetBlocks.Screens.RIGHT_SCREEN"],
+                                                ["both","PuppetBlocks.Screens.BOTH_SCREEN"]]), "screen")
+        .appendField("screen");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(20);
+    this.setTooltip("show text on screen");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['blackScreen'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("set")
+        .appendField(new Blockly.FieldDropdown([["left","PuppetBlocks.Screens.LEFT_SCREEN"],
+                                                ["right","PuppetBlocks.Screens.RIGHT_SCREEN"],
+                                                ["both","PuppetBlocks.Screens.BOTH_SCREEN"]]), "screen")
+        .appendField("screen black");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(20);
+    this.setTooltip("make screen black");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['whiteScreen'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("set")
+        .appendField(new Blockly.FieldDropdown([["left","PuppetBlocks.Screens.LEFT_SCREEN"],
+                                                ["right","PuppetBlocks.Screens.RIGHT_SCREEN"],
+                                                ["both","PuppetBlocks.Screens.BOTH_SCREEN"]]), "screen")
+        .appendField("screen white");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(20);
+    this.setTooltip("make screen white");
+    this.setHelpUrl("#");
   }
 };
 

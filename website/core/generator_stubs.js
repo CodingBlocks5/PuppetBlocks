@@ -6505,86 +6505,127 @@ Blockly.Python['mpu9250_temp'] = function(block) {
 
 // Movement
 
-Blockly.Python['set_servo_x'] = function(block) {
-	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
-	var value_part = Blockly.Python.valueToCode(block, 'part', Blockly.Python.ORDER_ATOMIC);
-	var code = 'PuppetBlocks.Movement.setServoX(' + value_part + ')\n';
+Blockly.Python['setPitch'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var value_part = block.getFieldValue('part');
+	var code = 'PuppetBlocks.Movement.setPitch(' + value_part + ')\n';
 	return code;
 };
 
-Blockly.Python['set_servo_y'] = function(block) {
-	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
-	var value_part = Blockly.Python.valueToCode(block, 'part', Blockly.Python.ORDER_ATOMIC);
-	var code = 'PuppetBlocks.Movement.setServoY(' + value_part + ')\n';
+Blockly.Python['setRotation'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var value_part = block.getFieldValue('part');
+	var code = 'PuppetBlocks.Movement.setRotation(' + value_part + ')\n';
 	return code;
 };
 
-Blockly.Python['slide_servo_x'] = function(block) {
-	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
-	var value_part = Blockly.Python.valueToCode(block, 'part', Blockly.Python.ORDER_ATOMIC);
+Blockly.Python['slidePitch'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var value_part = block.getFieldValue('part');
 	var value_time = Blockly.Python.valueToCode(block, 'time', Blockly.Python.ORDER_ATOMIC);
-	var code = 'PuppetBlocks.Movement.slideServoX(' + value_part + ', ' +  value_time+ ')\n';
+	var code = 'PuppetBlocks.Movement.slidePitch(' + value_part + ', ' +  value_time + ')\n';
 	return code;
 };
 
-Blockly.Python['slide_servo_y'] = function(block) {
-	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
-	var value_part = Blockly.Python.valueToCode(block, 'part', Blockly.Python.ORDER_ATOMIC);
+Blockly.Python['slideRotation'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var value_part = block.getFieldValue('part');
 	var value_time = Blockly.Python.valueToCode(block, 'time', Blockly.Python.ORDER_ATOMIC);
-	var code = 'PuppetBlocks.Movement.slideServoY(' + value_part + ', ' +  value_time + ')\n';
+	var code = 'PuppetBlocks.Movement.slideRotation(' + value_part + ', ' +  value_time + ')\n';
 	return code;
 };
 
-Blockly.Python['get_servo_x'] = function(block) {
-	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
-	var code = 'PuppetBlocks.Movement.getServoX()';
+Blockly.Python['getPitch'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var code = 'PuppetBlocks.Movement.getPitch()';
 	return [code, Blockly.Python.ORDER_NONE];
 };
 
-Blockly.Python['get_servo_y'] = function(block) {
-	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
-	var code = 'PuppetBlocks.Movement.getServoY()';
+Blockly.Python['getRotation'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var code = 'PuppetBlocks.Movement.getRotation()';
 	return [code, Blockly.Python.ORDER_NONE];
 };
 
-Blockly.Python['record_joystick'] = function(block) {
-	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
+Blockly.Python['performLive'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var value_time = Blockly.Python.valueToCode(block, 'time', Blockly.Python.ORDER_ATOMIC);
+	var code = 'PuppetBlocks.Movement.performLive(' +  value_time + ')\n';
+	return code;
+};
+
+Blockly.Python['recordJoystick'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
 	var code = 'PuppetBlocks.Movement.recordJoystick()\n';
 	return code;
 };
 
-Blockly.Python['perform_recording'] = function(block) {
-	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
+Blockly.Python['performRecording'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
 	var code = 'PuppetBlocks.Movement.performRecording()\n';
 	return code;
 };
 
 
+// Screen
+
+Blockly.Python['showImage'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var value_file = Blockly.Python.valueToCode(block, 'file', Blockly.Python.ORDER_ATOMIC);
+	var dropdown_screen = block.getFieldValue('screen');
+	var code = 'PuppetBlocks.Screens.showImage(' + value_file + ', ' +  dropdown_screen + ')\n';
+	return code;
+};
+
+Blockly.Python['showText'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var value_text = Blockly.Python.valueToCode(block, 'text', Blockly.Python.ORDER_ATOMIC);
+	var dropdown_screen = block.getFieldValue('screen');
+	var code = 'PuppetBlocks.Screens.showText(' + value_text + ', ' +  dropdown_screen + ')\n';
+	return code;
+};
+
+Blockly.Python['blackScreen'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var dropdown_screen = block.getFieldValue('screen');
+	var code = 'PuppetBlocks.Screens.blackScreen(' +  dropdown_screen + ')\n';
+	return code;
+};
+
+Blockly.Python['whiteScreen'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var dropdown_screen = block.getFieldValue('screen');
+	var code = 'PuppetBlocks.Screens.whiteScreen(' +  dropdown_screen + ')\n';
+	return code;
+};
+
+
+
 // Files
 
 Blockly.Python['load_file'] = function(block) {
-	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
 	var value_file = Blockly.Python.valueToCode(block, 'file', Blockly.Python.ORDER_ATOMIC);
 	var code = 'PuppetBlocks.Files.loadFile(' + value_file + ')\n';
 	return code;
 };
 
 Blockly.Python['exist_file'] = function(block) {
-	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
 	var value_file = Blockly.Python.valueToCode(block, 'file', Blockly.Python.ORDER_ATOMIC);
 	var code = 'PuppetBlocks.Files.fileExists(' + value_file + ')';
 	return [code, Blockly.Python.ORDER_NONE];
 };
 
 Blockly.Python['delete_file'] = function(block) {
-	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
 	var value_file = Blockly.Python.valueToCode(block, 'file', Blockly.Python.ORDER_ATOMIC);
 	var code = 'PuppetBlocks.Files.deleteFile(' + value_file + ')\n';
 	return code;
 };
 
 Blockly.Python['rename_file'] = function(block) {
-	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
 	var value_prev_name = Blockly.Python.valueToCode(block, 'prev_name', Blockly.Python.ORDER_ATOMIC);
 	var value_new_name = Blockly.Python.valueToCode(block, 'new_name', Blockly.Python.ORDER_ATOMIC);
 	var code = 'PuppetBlocks.Files.renameFile(' + value_prev_name +', ' + value_new_name + ')\n';
@@ -6592,7 +6633,7 @@ Blockly.Python['rename_file'] = function(block) {
 };
 
 Blockly.Python['get_files'] = function(block) {
-	Blockly.Python.definitions_['import_puppet_block'] = 'import puppet_blocks as PuppetBlocks';
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
 	var code = 'PuppetBlocks.Files.getFiles()';
 	return [code, Blockly.Python.ORDER_NONE];
 };
