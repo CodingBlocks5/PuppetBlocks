@@ -24834,27 +24834,45 @@ Blockly.Blocks['pause'] = {
   }
 };
 
-Blockly.Blocks['pause'] = {
+Blockly.Blocks['resume'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("pause audio");
+        .appendField("resume audio");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(50);
-    this.setTooltip("pause audio");
+    this.setTooltip("resume audio");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['stop'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("stop audio");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(50);
+    this.setTooltip("stop audio");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['isPlaying'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("is playing?");
+    this.setOutput(true, "Boolean");
+    this.setColour(50);
+    this.setTooltip("get playing status");
     this.setHelpUrl("#");
   }
 };
 
 
-
-
-
-
-
 // Files
 
-Blockly.Blocks['load_file'] = {
+Blockly.Blocks['loadFile'] = {
   init: function() {
     this.appendValueInput("file")
         .setCheck("String")
@@ -24869,7 +24887,7 @@ Blockly.Blocks['load_file'] = {
   }
 };
 
-Blockly.Blocks['exist_file'] = {
+Blockly.Blocks['fileExists'] = {
   init: function() {
     this.appendValueInput("file")
         .setCheck("String")
@@ -24883,7 +24901,7 @@ Blockly.Blocks['exist_file'] = {
   }
 }
 
-Blockly.Blocks['delete_file'] = {
+Blockly.Blocks['deleteFile'] = {
   init: function() {
     this.appendValueInput("file")
         .setCheck("String")
@@ -24898,7 +24916,7 @@ Blockly.Blocks['delete_file'] = {
   }
 };
 
-Blockly.Blocks['rename_file'] = {
+Blockly.Blocks['renameFile'] = {
   init: function() {
     this.appendValueInput("prev_name")
         .setCheck("String")
@@ -24915,7 +24933,7 @@ Blockly.Blocks['rename_file'] = {
   }
 };
 
-Blockly.Blocks['get_files'] = {
+Blockly.Blocks['listFiles'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("get all loaded files");

@@ -1167,31 +1167,35 @@ function eraseCookieModal(name) {
           </shadow>
         </value>
       </block>
+      <block type="pause"></block>
+      <block type="resume"></block>
+      <block type="stop"></block>
+      <block type="isPlaying"></block>
     </category>
 
     <category name="Files" colour="80">
-      <block type="load_file">
+      <block type="loadFile">
         <value name="file">
           <shadow type="text">
             <field name="TEXT">audio.wav</field>
           </shadow>
         </value>
       </block>
-      <block type="exist_file">
+      <block type="fileExists">
         <value name="file">
           <shadow type="text">
             <field name="TEXT">audio.wav</field>
           </shadow>
         </value>
       </block>
-      <block type="delete_file">
+      <block type="deleteFile">
         <value name="file">
           <shadow type="text">
             <field name="TEXT">audio.wav</field>
           </shadow>
         </value>
       </block>
-      <block type="rename_file">
+      <block type="renameFile">
         <value name="prev_name">
           <shadow type="text">
             <field name="TEXT">image.wav</field>
@@ -1203,7 +1207,7 @@ function eraseCookieModal(name) {
           </shadow>
         </value>
       </block>
-      <block type="get_files"></block>
+      <block type="listFiles"></block>
     </category>
 
     <category name="Time" colour="110">
