@@ -24698,7 +24698,7 @@ Blockly.Blocks['showImage'] = {
         .appendField("on")
         .appendField(new Blockly.FieldDropdown([["left","PuppetBlocks.Screens.LEFT_SCREEN"],
                                                 ["right","PuppetBlocks.Screens.RIGHT_SCREEN"],
-                                                ["both","PuppetBlocks.Screens.BOTH_SCREEN"]]), "screen")
+                                                ["both","PuppetBlocks.Screens.BOTH_SCREENS"]]), "screen")
         .appendField("screen");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -24717,7 +24717,7 @@ Blockly.Blocks['showText'] = {
         .appendField("on")
         .appendField(new Blockly.FieldDropdown([["left","PuppetBlocks.Screens.LEFT_SCREEN"],
                                                 ["right","PuppetBlocks.Screens.RIGHT_SCREEN"],
-                                                ["both","PuppetBlocks.Screens.BOTH_SCREEN"]]), "screen")
+                                                ["both","PuppetBlocks.Screens.BOTH_SCREENS"]]), "screen")
         .appendField("screen");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -24733,7 +24733,7 @@ Blockly.Blocks['blackScreen'] = {
         .appendField("set")
         .appendField(new Blockly.FieldDropdown([["left","PuppetBlocks.Screens.LEFT_SCREEN"],
                                                 ["right","PuppetBlocks.Screens.RIGHT_SCREEN"],
-                                                ["both","PuppetBlocks.Screens.BOTH_SCREEN"]]), "screen")
+                                                ["both","PuppetBlocks.Screens.BOTH_SCREENS"]]), "screen")
         .appendField("screen black");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -24749,7 +24749,7 @@ Blockly.Blocks['whiteScreen'] = {
         .appendField("set")
         .appendField(new Blockly.FieldDropdown([["left","PuppetBlocks.Screens.LEFT_SCREEN"],
                                                 ["right","PuppetBlocks.Screens.RIGHT_SCREEN"],
-                                                ["both","PuppetBlocks.Screens.BOTH_SCREEN"]]), "screen")
+                                                ["both","PuppetBlocks.Screens.BOTH_SCREENS"]]), "screen")
         .appendField("screen white");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
