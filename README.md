@@ -42,7 +42,26 @@ an academic semester and is released under GNU General Public License v3.0.
 
 ## Hardware
 
+As an IoT project, one of the main components is a Puppet, which is a robot with an ESP32 micro-controller,
+two servo engines, two screens, a 2-dimension joystick, a speaker, and an SD card. 
+
+We used the following hardware components in the project:
+- **ESP32 board** - the micro-controller we used to control the puppet.
+- **Head and Gimbal Connector** - both 3-D printed specifically to the project.
+- **MAX98357A Amplifier** - LRC connected to Pin 25, BCLK connected to Pin 32, DIN connected to Pin 33.
+- **Joystick (Two Potentiometers)** - VRy connected to Pin SN, VRx connected to Pin SP, SW connected to Pin 16.
+- **SG90 Servo (for pitch in a Gimbal)** - Signal connected to 26
+- **SG90 Servo (for rotation in a Gimbal)** - Signal connected to 14
+- **SH1109 1.3 Inch (Left screen with address 0x3dc)** - SCL connected to 22, SDA connected to 21.
+- **SH1109 1.3 Inch (Right screen with address 0x3d)** - SCL connected to 22, SDA connected to 21.
+- **SD Card** - CS connected to 5, MOSI connected to 23, CLK connected to 18, MISO connected to 19.
+
+The following diagram shows the connections described above:
+
 [![connections](/hardware/connections.png)](https://github.com/CodingBlocks5/PuppetBlocks/blob/main/hardware/connections.png)
+
+The script [`Check.py`](https://github.com/CodingBlocks5/PuppetBlocks/blob/main/hardware/Check.py) can help ensuring that all
+the hardware components work correctly. The code can be ran using Thonny, after installing the firmware as described below.
 
 
 ## Firmware
