@@ -41,7 +41,8 @@ an academic semester and is released under GNU General Public License v3.0.
 
 
 ## Hardware
-[![connections](/Hardware/connections.png)](https://github.com/CodingBlocks5/PuppetBlocks/blob/main/hardware/connections.png)
+
+[![connections](/hardware/connections.png)](https://github.com/CodingBlocks5/PuppetBlocks/blob/main/hardware/connections.png)
 
 
 ## Firmware
