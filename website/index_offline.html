@@ -1123,7 +1123,7 @@ function eraseCookieModal(name) {
       <block type="showImage">
         <value name="file">
           <shadow type="text">
-            <field name="TEXT">replrepl.pbm</field>
+            <field name="TEXT">image.pbm</field>
           </shadow>
         </value>
       </block>
@@ -1139,7 +1139,34 @@ function eraseCookieModal(name) {
     </category>
 
     <category name="Audio" colour="50">
-      <block type="controls_if"></block>
+      <block type="synchronousPlay">
+        <value name="file">
+          <shadow type="text">
+            <field name="TEXT">audio.wav</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="asynchronousPlay">
+        <value name="file">
+          <shadow type="text">
+            <field name="TEXT">audio.wav</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="synchronousPlayLoop">
+        <value name="file">
+          <shadow type="text">
+            <field name="TEXT">audio.wav</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="asynchronousPlayLoop">
+        <value name="file">
+          <shadow type="text">
+            <field name="TEXT">audio.wav</field>
+          </shadow>
+        </value>
+      </block>
     </category>
 
     <category name="Files" colour="80">

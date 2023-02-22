@@ -320,7 +320,28 @@
       <block type="synchronousPlay">
         <value name="file">
           <shadow type="text">
-            <field name="TEXT">Hello, World!</field>
+            <field name="TEXT">audio.wav</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="asynchronousPlay">
+        <value name="file">
+          <shadow type="text">
+            <field name="TEXT">audio.wav</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="synchronousPlayLoop">
+        <value name="file">
+          <shadow type="text">
+            <field name="TEXT">audio.wav</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="asynchronousPlayLoop">
+        <value name="file">
+          <shadow type="text">
+            <field name="TEXT">audio.wav</field>
           </shadow>
         </value>
       </block>

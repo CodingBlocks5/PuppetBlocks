@@ -29,7 +29,7 @@ sd = SDCard(
 )
 os.mount(sd, "/sd")
 
-BASE_DIRECTORY = '/sd/PuppetBlock/'
+BASE_DIRECTORY = '/sd/PuppetBlocks/'
 
 class Movement:
     __servoPitch        = Servo(Pin(26))

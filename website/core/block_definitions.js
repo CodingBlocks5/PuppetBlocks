@@ -24822,6 +24822,32 @@ Blockly.Blocks['asynchronousPlayLoop'] = {
   }
 };
 
+Blockly.Blocks['pause'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("pause audio");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(50);
+    this.setTooltip("pause audio");
+    this.setHelpUrl("#");
+  }
+};
+
+Blockly.Blocks['pause'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("pause audio");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(50);
+    this.setTooltip("pause audio");
+    this.setHelpUrl("#");
+  }
+};
+
+
+
 
 
 
