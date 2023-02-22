@@ -68,24 +68,25 @@ def main() -> None:
         # Third stage: create 'Secrets.py' file 
         content = f'NETWORK_ID = "{network_id}"; NETWORK_PASSWORD = "{network_password}"\n'
         file.write(content.encode('utf-8'))
+        file.seek(0)
         print('--- PuppetBlocks BURNER: Secrets.py file has been created! ---')
 
         # Fourth stage: set standard library
         files = {
-            'Audio.py': 'Audio.py',
-            'boot.py': 'boot.py',
-            'PuppetBlocks.py': 'PuppetBlocks.py',
-            'Screen.py': 'Screen.py',
-            'Secrets.py': file.name,
+            'Audio.py': open('Audio.py', 'rb'),
+            'boot.py': open('boot.py', 'rb'),
+            'PuppetBlocks.py': open('PuppetBlocks.py', 'rb'),
+            'Screen.py': open('Screen.py', 'rb'),
+            'Secrets.py': file,
         }
-        with serial.Serial(connection, 115200, timeout=5) as serial_connection:
-            for name, filename in files.items():
-                content = open(filename, 'rb').read()
+        with serial.Serial(connection, 115200, timeout=5, rtscts=False, dsrdtr=False) as serial_connection:
+            for name, file_stream in files.items():
+                content = file_stream.read()
                 length = len(content)
                 code =  f'import sys\n' + \
-                        f'with open({name}, "wb") as file:\n' + \
+                        f'with open("{name}", "wb") as file:\n' + \
                         f'\tfile.write(sys.stdin.buffer.read({length}))\n\n'
-                serial_connection.write(content.encode('utf-8'))
+                serial_connection.write(code.encode('utf-8'))
                 serial_connection.write(content)
         print('--- PuppetBlocks BURNER: Standard library has installed! ---')
 
