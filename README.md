@@ -80,4 +80,20 @@ and Russian.
 
 ## Project Engineering
 
-?
+For security purposes, commits were signed cryptographically, security Github Actions were enabled, and a
+[SECURITY.md](https://github.com/CodingBlocks5/PuppetBlocks/blob/main/SECURITY.md) file was written. For documentation, a
+[SUPPORT.md](https://github.com/CodingBlocks5/PuppetBlocks/blob/main/SUPPORT.md) file was written. The project was written using
+both Visual Studio Code and Thonny IDE, and was managed using [GitHub](https://github.com/CodingBlocks5/PuppetBlocks).
+
+For allowing an easier development, the following Github Actions were set, running on Linux (Ubuntu 20.04).:
+1) **[Website](https://github.com/CodingBlocks5/PuppetBlocks/actions/workflows/website.yml)** - the
+[PuppetBlocks website](https://codingblocks5.github.io/PuppetBlocks/) is updated with the current information.
+2) **[Vulnerabilities check](https://github.com/CodingBlocks5/PuppetBlocks/actions/workflows/vulnerabilities.yml)** - the
+updated code is checked to ensure it does not contain any known vulnerability.
+3) **[Dependency review](https://github.com/CodingBlocks5/PuppetBlocks/actions/workflows/dependency-review.yml)** - the
+dependencies are reviewed to check for any security issues.
+4) **[Dependabot](https://github.com/CodingBlocks5/PuppetBlocks/blob/main/.github/dependabot.yml)** - the
+dependency versions (in
+[requirements.txt](https://github.com/CodingBlocks5/PuppetBlocks/blob/main/firmware/requirements.txt)) are updated regularly.
+
+Please feel free to contact us with any questions you have about PuppetBlocks.
