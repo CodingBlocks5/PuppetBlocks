@@ -43,7 +43,6 @@ import upip
 upip.install('webrepl')
 upip.install('shutil')
 upip.install('urequests')
-upip.install('nptime')
 
 
 # --- Fourth stage: update time from the internet
