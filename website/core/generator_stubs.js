@@ -6718,4 +6718,19 @@ Blockly.Python['getTime'] = function(block) {
 	return [code, Blockly.Python.ORDER_NONE];
 };
 
+Blockly.Python['addTime'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var value_value = Blockly.Python.valueToCode(block, 'value', Blockly.Python.ORDER_ATOMIC);
+	var dropdown_unit = block.getFieldValue('unit');
+	var value_source_time = Blockly.Python.valueToCode(block, 'source_time', Blockly.Python.ORDER_ATOMIC);
+	var code = 'PuppetBlocks.Time.getTime(' + value_source_time + ', ' + value_value + ', ' + dropdown_unit + ')';
+	return [code, Blockly.Python.ORDER_NONE];
+};
+
+Blockly.Python['getTimeUnit'] = function(block) {
+	Blockly.Python.definitions_['import_puppet_block'] = 'import PuppetBlocks';
+	var dropdown_unit = block.getFieldValue('unit');
+	var code = 'PuppetBlocks.Time.getTimeUnit(' + dropdown_unit + ')';
+	return [code, Blockly.Python.ORDER_NONE];
+};
 

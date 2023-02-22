@@ -392,7 +392,7 @@
       <block type="sleepLibrary">
         <value name="length">
           <shadow type="math_number">
-            <field name="NUM"></field>
+            <field name="NUM">5</field>
           </shadow>
         </value>
       </block>
@@ -403,6 +403,18 @@
         </value>
       </block>
       <block type="getTime"></block>
+      <block type="addTime">
+        <value name="value">
+          <shadow type="math_number">
+            <field name="NUM">5</field>
+          </shadow>
+        </value>
+        <value name="source_time">
+          <shadow type="getTime">
+          </shadow>
+        </value>
+      </block>
+      <block type="getTimeUnit"></block>
     </category>
 
 </document>

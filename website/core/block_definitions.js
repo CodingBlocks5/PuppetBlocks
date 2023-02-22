@@ -24993,7 +24993,43 @@ Blockly.Blocks['getTime'] = {
   }
 };
 
+Blockly.Blocks['addTime'] = {
+  init: function() {
+    this.appendValueInput("value")
+        .setCheck("Number")
+        .appendField("add");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["seconds","PuppetBlocks.Time.SECOND"],
+                                              ["minutes","PuppetBlocks.Time.MINUTE"],
+                                              ["hours","PuppetBlocks.Time.HOUR"],
+                                              ["days","PuppetBlocks.Time.DAY"],
+                                              ["months","PuppetBlocks.Time.MONTH"],
+                                              ["years","PuppetBlocks.Time.YEAR"]]), "unit");
+    this.appendValueInput("source_time")
+        .setCheck("PuppetBlocksTime")
+        .appendField("to");
+    this.setInputsInline(true);
+    this.setOutput(true, "PuppetBlocksTime");
+    this.setColour(110);
+    this.setTooltip("show text on screen");
+    this.setHelpUrl("#");
+  }
+};
 
-
-
-
+Blockly.Blocks['getTimeUnit'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("get current")
+        .appendField(new Blockly.FieldDropdown([["seconds","PuppetBlocks.Time.SECOND"],
+                                              ["minutes","PuppetBlocks.Time.MINUTE"],
+                                              ["hours","PuppetBlocks.Time.HOUR"],
+                                              ["days","PuppetBlocks.Time.DAY"],
+                                              ["months","PuppetBlocks.Time.MONTH"],
+                                              ["years","PuppetBlocks.Time.YEAR"]]), "unit");
+    this.setInputsInline(true);
+    this.setOutput(true, "PuppetBlocksTime");
+    this.setColour(110);
+    this.setTooltip("get current time");
+    this.setHelpUrl("#");
+  }
+};
