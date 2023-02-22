@@ -8,23 +8,36 @@ import time
 import shutil
 import urequests
 
-from machine import Pin, ADC, RTC
-from servo import Servo
+from machine import Pin, ADC, RTC, SDCard
 from framebuf import FrameBuffer, MONO_HLSB
 
+from Servo import Servo
 from Screen import Screen
 from Audio import Speaker
 
+
+sd = SDCard(
+    slot=2,
+    width=1,
+    cd=None,
+    wp=None,
+    sck=Pin(18),
+    miso=Pin(19),
+    mosi=Pin(23),
+    cs=Pin(5),
+    freq=20000000
+)
+os.mount(sd, "/sd")
 
 BASE_DIRECTORY = '/sd/PuppetBlock/'
 
 class Movement:
     __servoPitch        = Servo(Pin(26))
     __servoRotation     = Servo(Pin(14))
-    __joystickPitch     = ADC(Pin(39))
-    __joystickRotation  = ADC(Pin(36))
-    __valuePitch        = 0
-    __valueRotation     = 0
+    __joystickPitch     = ADC(Pin(36))
+    __joystickRotation  = ADC(Pin(39))
+    __valuePitch        = 180
+    __valueRotation     = 180
     __recording         = [(0, 0) for _ in range(50)]
     __isInitialized     = False
 
@@ -62,14 +75,14 @@ class Movement:
 
     @staticmethod
     def slidePitch(value, length):
-        for val in Movement.__linespace(Movement.__valuePitch, value, length):
+        for val in Movement.__linespace(Movement.__valuePitch, value, length * 10):
             Movement.setPitch(val)
             time.sleep(0.1)
         Movement.setPitch(value)
 
     @staticmethod
     def slideRotation(value, length):
-        for val in Movement.__linespace(Movement.__valueRotation, value, length):
+        for val in Movement.__linespace(Movement.__valueRotation, value, length * 10):
             Movement.setRotation(val)
             time.sleep(0.1)
         Movement.setRotation(value)
@@ -77,12 +90,12 @@ class Movement:
     @staticmethod
     def getPitch():
         Movement.__initialize()
-        return Movement.__joystickPitch.read() / 4096
+        return (1.0 - (Movement.__joystickPitch.read() / 4096)) * 360
 
     @staticmethod
     def getRotation():
         Movement.__initialize()
-        return Movement.__joystickRotation.read() / 4096
+        return (1.0 - (Movement.__joystickRotation.read() / 4096)) * 360
 
     @staticmethod
     def recordJoystick():
@@ -105,8 +118,8 @@ class Screens:
     RIGHT_SCREEN    = 2
     BOTH_SCREENS    = 3
     
-    __leftScreen = Screen(addr=0x3d)
-    __rightScreen = Screen(addr=0x3c)
+    __leftScreen = Screen(addr=0x3c)
+    __rightScreen = Screen(addr=0x3d)
 
     @staticmethod
     def showImage(filename, screen):
@@ -139,19 +152,19 @@ class Screens:
     @staticmethod
     def blackScreen(screen):
         if screen == Screens.LEFT_SCREEN or screen == Screens.BOTH_SCREENS:
-            Screens.__leftScreen.fill(0)
+            Screens.__leftScreen.fill(1)
             Screens.__leftScreen.show()
         if screen == Screens.RIGHT_SCREEN or screen == Screens.BOTH_SCREENS:
-            Screens.__rightScreen.fill(0)
+            Screens.__rightScreen.fill(1)
             Screens.__rightScreen.show()
 
     @staticmethod
     def whiteScreen(screen):
         if screen == Screens.LEFT_SCREEN or screen == Screens.BOTH_SCREENS:
-            Screens.__leftScreen.fill(1)
+            Screens.__leftScreen.fill(0)
             Screens.__leftScreen.show()
         if screen == Screens.RIGHT_SCREEN or screen == Screens.BOTH_SCREENS:
-            Screens.__rightScreen.fill(1)
+            Screens.__rightScreen.fill(0)
             Screens.__rightScreen.show()
 
 
@@ -197,7 +210,7 @@ class Files:
 
     @staticmethod
     def fileExists(filename):
-        return os.path.isfile(BASE_DIRECTORY + filename)
+        return filename in Files.listFiles()
 
     @staticmethod
     def deleteFile(filename):
@@ -209,7 +222,7 @@ class Files:
 
     @staticmethod
     def listFiles():
-        return os.listdir(BASE_DIRECTORY)
+        return os.listdir(BASE_DIRECTORY[0:-1])
 
 
 class Time:
@@ -235,22 +248,23 @@ class Time:
     @staticmethod
     def sleep(length, unit):
         if unit == Time.YEAR:
-            time.sleep(365 * 24 * 60 * 60 * unit)
+            time.sleep(365 * 24 * 60 * 60 * length)
         elif unit == Time.MONTH:
-            time.sleep(30 * 24 * 60 * 60 * unit)
+            time.sleep(30 * 24 * 60 * 60 * length)
         elif unit == Time.DAY:
-            time.sleep(24 * 60 * 60 * unit)
+            time.sleep(24 * 60 * 60 * length)
         elif unit == Time.HOUR:
-            time.sleep(60 * 60 * unit)
+            time.sleep(60 * 60 * length)
         elif unit == Time.MINUTE:
-            time.sleep(60 * unit)
+            time.sleep(60 * length)
         elif unit == Time.SECOND:
-            time.sleep(unit)
+            time.sleep(length)
 
     @staticmethod
-    def sleepUntil(time):
+    def sleepUntil(final_time):
         current_time = Time.__timeToInt(Time.getTime())
-        while current_time < time:
+        desired_time = Time.__timeToInt(final_time)
+        while current_time < desired_time:
             time.sleep(0.1)
             current_time = Time.__timeToInt(Time.getTime())
 
@@ -260,8 +274,8 @@ class Time:
         return (year, month, day, hour, minute, second)
 
     @staticmethod
-    def addTime(time, value, unit):
-        (year, month, day, hour, minute, second) = time
+    def addTime(source_time, value, unit):
+        (year, month, day, hour, minute, second) = source_time
         if unit == Time.YEAR:
             return (year + value, month, day, hour, minute, second)
         elif unit == Time.MONTH:
