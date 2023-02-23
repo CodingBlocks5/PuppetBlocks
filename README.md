@@ -43,7 +43,8 @@ an academic semester and is released under GNU General Public License v3.0.
 ## Hardware
 
 As an IoT project, one of the main components is a Puppet, which is a robot with an ESP32 micro-controller,
-two servo engines, two screens, a 2-dimension joystick, a speaker, and an SD card. 
+two servo engines, two screens, a 2-dimension joystick, a speaker, and an SD card. We chose the components
+to be cheap (we assume that the total cost is no more than 30$), so schools can replicate our work easily.
 
 We used the following hardware components in the project:
 - **ESP32 board** - the micro-controller we used to control the puppet.
@@ -66,7 +67,73 @@ the hardware components work correctly. The code can be ran using Thonny, after 
 
 ## Firmware
 
-?
+In order to perform actions using the website, a firmware with a standard library has to be burned on the micro-controller.
+The firmware allows using MicroPython for interpreting the commands, the PuppetBlocks library provides an abstraction
+of the possible actions for an easier use for elementary school students.
+
+In order to burn MicroPython on the device, Requests and pathlib has to be install on the local computer, which can be
+done using Pip package installer: 
+
+```bash
+python -m pip install -r requirements.txt
+```
+Then, running the burner with `--help` flag gives the list of the parameters to provide:
+
+```bash
+python burn.py --help
+```
+
+The following output is given:
+
+```text
+usage: burn.py [-h] [-m MICROPYTHON] -e ESPTOOL -c CONNECTION
+
+PuppetBlocks - Learn programming with blocks and a puppet.
+
+options:
+  -h, --help            show this help message and exit
+  -m MICROPYTHON, --micropython MICROPYTHON
+                        the url of the MicroPython firmware (default: v1.19.1)
+  -e ESPTOOL, --esptool ESPTOOL
+                        the root for esptool.exe
+  -c CONNECTION, --connection CONNECTION
+                        the connection to the device (usually COM4)
+
+For help with the burner please read SUPPORT.md .
+```
+
+After specifying a location for a local `esptool.exe` file, a serial connection to the micro-controller, and
+optionally a url for a MicroPython firmware (without the `--help` flag), a single click is required on the
+BOOT button on the ESP32 controller for allowing the burning.
+
+Additionally, the following files are part of the PuppetBlocks standard library:
+- [**`Audio.py`**](https://github.com/CodingBlocks5/PuppetBlocks/blob/main/firmware/Audio.py) - This file
+include a class for a speaker player (which plays audio in a different thread) in the project.
+- [**`boot.py`**](https://github.com/CodingBlocks5/PuppetBlocks/blob/main/firmware/boot.py) - This file runs
+on each start and *has to replace* the default file created when burning MicroPython.
+- [**`PuppetBlocks.py`**](https://github.com/CodingBlocks5/PuppetBlocks/blob/main/firmware/PuppetBlocks.py) -
+This file contains the interface and the implementations for the blocks used in the website.
+- [**`Screen.py`**](https://github.com/CodingBlocks5/PuppetBlocks/blob/main/firmware/Screen.py) - This file
+include a class for both of the screens in the project.
+- [**`Secrets.py`**](https://github.com/CodingBlocks5/PuppetBlocks/blob/main/firmware/Secrets.py) - In
+this file, the actual WiFi SSID and the actual WiFi password *has to be specified*. Without setting these
+parameters correctly, the ESP32 controller might not start successfully in the future.
+- [**`Servo.py`**](https://github.com/CodingBlocks5/PuppetBlocks/blob/main/firmware/Servo.py) - This file
+include a class for both of the servo engine in the project.
+
+As a summary, the following steps have to be performed in order to burn MicroPython and PuppetBlocks standard library:
+
+1) Installing the dependencies for the burner with using Pip package installer.
+2) Downloading an `esptool.exe` to the device (usually such a file is downloaded when installing Arduino IDE).
+3) Optionally erasing the flash memory of the ESP32 micro-controller, optionally using the `esptool.exe`.
+4) Burning MicroPython firmware using the script.
+5) Setting the actual WiFi SSID and the actual WiFi password in the relevant file.
+6) Uploading the six files to the device, optionally using Thonny.
+7) Connecting the device (once) using the PuTTY, Thonny, or the serial connection in the website, writing `import webrepl_setup`,
+writing `E`, specifying a password and confirming it, and finally resetting the device (optionally using disconnecting and
+connecting the device). 
+
+The total process might take a few minutes, but it has to be performed only once for each device.
 
 ## Website
 
