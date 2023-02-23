@@ -103,7 +103,7 @@ For help with the burner please read SUPPORT.md .
 ```
 
 After specifying a location for a local `esptool.exe` file, a serial connection to the micro-controller, and
-optionally a url for a MicroPython firmware (without the `--help` flag), a single click is required on the
+optionally a URL for a MicroPython firmware (without the `--help` flag), a single click is required on the
 BOOT button on the ESP32 controller for allowing the burning.
 
 Additionally, the following files are part of the PuppetBlocks standard library:
