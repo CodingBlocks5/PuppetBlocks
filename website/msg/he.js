@@ -239,10 +239,10 @@ var MSG = {
   song: "Song",
 
   //Splash screen
-  splash_welcome: "ברוכים הבאים ל-BIPES!",
+  splash_welcome: "ברוכים הבאים ל־PuppetBlocks!",
   splash_footer: "אל תציג את המסך הזה שוב",
   splash_close: "סגור",
-  splash_message: "<p><b>BIPES: פלטפורמה משולבת מבוססת קטע קוד למערכות משובצות</B> מאפשרת תכנות מבוסס טקסט וקטע קוד עבור מספר סוגים של מערכות משובצות ומודולים של האינטרנט של הדברים באמצעות MicroPython, CircuitPython, Python או Snek. אתה יכול לחבר, לתכנת, לנפות באגים ולנטר מספר סוגים של לוחות באמצעות רשת, USB או Bluetooth. אנא בדוק רשימה של <a href=https://bipes.net.br/wp/boards/>לוחות תואמים כאן</a>. לוחות תואמים כוללים STM32, ESP32, ESP8266, Raspberry Pi Pico ואפילו Arduino. <p><b>BIPES</b> הוא מלא <a href=https://bipes.net.br/wp/development/>קוד פתוח</a> ומבוסס על HTML ו-JavaScript, כך שאין התקנת תוכנה או יש צורך בתצורה ואתה יכול להשתמש בה במצב לא מקוון! אנו מקווים ש-BIPES שימושי עבורך ושתוכל ליהנות מהשימוש ב-BIPES. אם אתה צריך עזרה, יש לנו כעת <a href=https://github.com/BIPES/BIPES/discussions>פורום דיונים</a>, שבו אנו מפרסמים גם <a href=https://github.com/ BIPES/BIPES/discussions/categories/announcements>תכונות חדשות והכרזות על BIPES</a>. אתה מוזמן להשתמש בו! כמו כן, אנו מזמינים אותך להשתמש בפורום כדי להשאיר משוב והצעות עבור BIPES!</p><p>עכשיו אתה יכול לטעון בקלות את MicroPython ב-ESP32 או ESP8226 שלך לשימוש עם BIPES: <a href=https://bipes. net.br/flash/esp-web-tools/>https://bipes.net.br/flash/esp-web-tools/</a></p><p>Checkout BIPES הזמן ב-<a href= https://bipes.net.br/wp/book-livro/>https://bipes.net.br/wp/book-livro/</a></p> <p>תודה מצוות BIPES !</p>"
+  splash_message: "<p><b>PuppetBlocks</b> - אנו פלטפורמת קוד פתוח המאפשרת תכנות חזותי עבור תכנות של בובה אינטרקטיבית, על ידי החומרה ESP3232 מיקרו־בקר, וקושחת MicroPython. בעזרת הפלטפורמה הזו תוכלו לתכנת בעזרת בלוקים של טקסט. תוכלו להתחבר, לתכנת ולדבג בעזרת חיבור לרשת אלחוטית או לחיבור עם כבל USB.</p><p>מוזמנים לבקר בגיט שלנו כאן: <a href=https://github.com/CodingBlocks5/PuppetBlocks>https://github.com/CodingBlocks5/PuppetBlocks</a></p><p>שמחים שהגעתם לאתר שלנו - צוות PuppetBlocks!</p>"
 };
 
 //Toolbox categories
